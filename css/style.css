@@ -1,21 +1,33 @@
-@import url("photographer.css");
-:root {
-  --clr-bg-light: rgb(255, 255, 255);
-  --clr-bg-dark: rgb(250, 250, 250);
-  --clt-txt-primary: rgb(211, 87, 60);
-  --clr-txt-secondary: rgb(144, 28, 28);
-  --clr-txt-light: rgb(255, 255, 255);
-  --clr-txt-dark: rgb(82, 82, 82);
-  --clr-txt-darker: rgb(0, 0, 0);
-  --clr-btn-primary: rgb(144, 28, 28);
-  --clr-btn-secondary: rgb(220, 136, 118);
-  --clr-border: rgb(115, 115, 115);
-  --clr-placeholder-txt: rgb(178, 178, 178);
-  --clr-placeholder-img: rgb(196, 196, 196);
+* {
+  font-family: "DM Sans", sans-serif;
+}
+
+h1 {
+  color: rgb(144, 28, 28);
+}
+
+.photographer_section article h2 {
+  color: rgb(211, 87, 60);
+  font-size: 2.25rem;
+}
+
+.contact_button {
+  color: rgb(255, 255, 255);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.modal header h2 {
+  font-size: 4rem;
+  font-weight: 400;
+}
+
+form label {
+  color: rgb(49, 46, 46);
+  font-size: 2.25rem;
 }
 
 body {
-  font-family: "DM Sans", sans-serif;
   margin: 0;
 }
 
@@ -28,7 +40,6 @@ header {
 }
 
 h1 {
-  color: #901c1c;
   margin-right: 100px;
 }
 
@@ -52,11 +63,6 @@ h1 {
   flex-direction: column;
 }
 
-.photographer_section article h2 {
-  color: #d3573c;
-  font-size: 36px;
-}
-
 .photographer_section article img {
   height: 200px;
   width: 200px;
@@ -73,9 +79,6 @@ h1 {
 }
 
 .contact_button {
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
   padding: 11px;
   width: 170px;
   height: 70px;
@@ -107,8 +110,6 @@ h1 {
 }
 
 .modal header h2 {
-  font-size: 64px;
-  font-weight: normal;
   text-align: center;
 }
 
@@ -117,11 +118,6 @@ form {
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
-}
-
-form label {
-  color: #312e2e;
-  font-size: 36px;
 }
 
 form div {

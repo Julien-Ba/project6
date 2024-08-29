@@ -9,9 +9,6 @@
 }
 
 .contact_button {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
     padding: 11px;
     width: 170px;
     height: 70px;
@@ -43,8 +40,6 @@
 }
 
 .modal header h2 {
-    font-size: 64px;
-    font-weight: normal;
     text-align: center;
 }
 
@@ -53,11 +48,6 @@ form {
     width: 100%;
     flex-direction: column;
     align-items: flex-start;
-}
-
-form label {
-    color: #312e2e;
-    font-size: 36px;
 }
 
 form div {
