@@ -11,7 +11,7 @@ async function getPhotographers() {
         }
 
         const json = await response.json();
-        //console.log(json);
+        console.debug(json);
         return json;
     } catch (error) {
         console.error(error.message);
