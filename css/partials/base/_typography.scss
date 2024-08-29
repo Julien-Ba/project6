@@ -8,9 +8,21 @@ h1 {
     color: utils.$clr-txt-secondary;
 }
 
-.photographer_section article h2 {
-    color: utils.$clt-txt-primary;
-    font-size: 2.25rem;
+.photographer_section .card {
+    &-title {
+        color: utils.$clt-txt-primary;
+        font-size: 2.25rem;
+    }
+    &-subtitle {
+        color: utils.$clr-txt-secondary;
+        font-size: 0.8125rem;
+    }
+    &-description {
+        font-size: 0.625rem;
+    }
+    &-price {
+        font-size: 0.5625rem;
+    }
 }
 
 .contact_button {
@@ -21,7 +33,6 @@ h1 {
 
 .modal header h2 {
     font-size: 4rem;
-    font-weight: 400;
 }
 
 form label {
