@@ -27,9 +27,8 @@ export class PhotographerTemplate {
     }
 
     async getUserPicture() {
-        const userData = this.getUserData();
-        const portraitPath = `assets/photographers/${userData.portrait}`;
-        const defaultPath = 'assets/photographers/default.png';
+        const portraitPath = `assets/photographers/${this.getUserData().portrait}`;
+        const defaultPath = `assets/photographers/${this.#defaultData.portrait}`;
 
         return new Promise((resolve) => {
             const img = new Image();
