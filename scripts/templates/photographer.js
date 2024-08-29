@@ -37,7 +37,7 @@ export class PhotographerTemplate {
             img.onerror = () => {
                 console.warn(`Failed to load image: ${portraitPath}, using default`);
                 resolve(defaultPath);
-            };
+            }
         });
     }
 
