@@ -1,0 +1,20 @@
+@use "../utils";
+
+.photographer_section .card {
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-img {
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        background-color: utils.$clr-placeholder-img;
+    }
+
+    &-title {
+        text-wrap: nowrap;
+    }
+}
