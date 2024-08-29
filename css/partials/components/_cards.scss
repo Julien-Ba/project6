@@ -1,11 +1,16 @@
 @use "../utils";
 
 .photographer_section .card {
-    justify-self: center;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    a {
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        justify-self: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
     &-img {
         height: 200px;
