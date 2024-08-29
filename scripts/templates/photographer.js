@@ -1,44 +1,10 @@
-export class PhotographerTemplate {
+import { PhotographerData } from "../api/photographer_data.js";
 
-    #defaultData = {
-        'name': 'Name',
-        'id': 'ID',
-        'city': 'City',
-        'country': 'Country',
-        'tagline': 'TagLine',
-        'price': 'Price',
-        'portrait': 'default.png'
-    }
+
+export class PhotographerTemplate extends PhotographerData {
 
     constructor(data) {
-        this.data = data;
-    }
-
-    getUserData() {
-        let userData = {};
-        for (let key in this.#defaultData) {
-            if (!this.data.hasOwnProperty(key) || this.data[key] === '') {
-                userData[key] = this.#defaultData[key];
-            } else {
-                userData[key] = this.data[key];
-            }
-        }
-        return userData;
-    }
-
-    async getUserPicture() {
-        const portraitPath = `assets/photographers/${this.getUserData().portrait}`;
-        const defaultPath = `assets/photographers/${this.#defaultData.portrait}`;
-
-        return new Promise((resolve) => {
-            const img = new Image();
-            img.src = portraitPath;
-            img.onload = () => resolve(portraitPath);
-            img.onerror = () => {
-                console.warn(`Failed to load image: ${portraitPath}, using default`);
-                resolve(defaultPath);
-            }
-        });
+        super(data);
     }
 
     async getUserCardDOM() {
@@ -46,36 +12,53 @@ export class PhotographerTemplate {
         article.classList.add('card')
 
         const link = document.createElement('a');
-        link.setAttribute('href', `./photographer.html?id=${this.getUserData().id}`);
+        link.href = `./photographer.html?id=${this.getUserData().id}`;
         article.appendChild(link);
 
-        const img = document.createElement('img');
-        img.setAttribute('src', await this.getUserPicture());
-        img.setAttribute('alt', `Portrait of ${this.getUserData().name}`);
-        img.setAttribute('loading', 'lazy');
-        img.classList.add('card-img');
-        link.appendChild(img);
-
-        const h2 = document.createElement('h2');
-        h2.textContent = this.getUserData().name;
-        h2.classList.add('card-title');
-        link.appendChild(h2);
-
-        const h3 = document.createElement('h3');
-        h3.textContent = `${this.getUserData().city}, ${this.getUserData().country}`;
-        h3.classList.add('card-subtitle');
-        link.appendChild(h3);
-
-        const p1 = document.createElement('p');
-        p1.textContent = this.getUserData().tagline;
-        p1.classList.add('card-description');
-        link.appendChild(p1);
-
-        const p2 = document.createElement('p');
-        p2.textContent = `${this.getUserData().price}€/jour`;
-        p2.classList.add('card-price');
-        link.appendChild(p2);
+        link.appendChild(await this.createImg());
+        link.appendChild(this.createTitle());
+        link.appendChild(this.createSubtitle());
+        link.appendChild(this.createDescription());
+        link.appendChild(this.createPrice());
 
         return article;
     }
+
+    async createImg() {
+        const img = document.createElement('img');
+        img.src = await this.getUserPicture();
+        img.alt = `Portrait of ${this.getUserData().name}`;
+        img.loading = 'lazy';
+        img.classList.add('card-img');
+        return img;
+    }
+
+    createTitle() {
+        const h2 = document.createElement('h2');
+        h2.textContent = this.getUserData().name;
+        h2.classList.add('card-title');
+        return h2;
+    }
+
+    createSubtitle() {
+        const h3 = document.createElement('h3');
+        h3.textContent = `${this.getUserData().city}, ${this.getUserData().country}`;
+        h3.classList.add('card-subtitle');
+        return h3;
+    }
+
+    createDescription() {
+        const p = document.createElement('p');
+        p.textContent = this.getUserData().tagline;
+        p.classList.add('card-description');
+        return p;
+    }
+
+    createPrice() {
+        const p = document.createElement('p');
+        p.textContent = `${this.getUserData().price}€/jour`;
+        p.classList.add('card-price');
+        return p;
+    }
+
 }
