@@ -1,5 +1,6 @@
 import { getPhotographers } from '../api/fetch_data.js';
 import { PhotographerTemplate } from '../templates/photographer.js';
+import { displayModal, closeModal } from '../utils/contactForm.js';
 
 
 
@@ -26,3 +27,9 @@ async function init() {
 }
 
 init();
+
+const openModalBtn = document.querySelector('.contact_button');
+openModalBtn.addEventListener('click', displayModal);
+
+const closeModalBtn = document.querySelector('.close-modal-btn');
+closeModalBtn.addEventListener('click', closeModal);
