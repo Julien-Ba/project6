@@ -24,4 +24,15 @@ h1 {
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
     margin-top: 100px;
+
+    .card a {
+        width: fit-content;
+        height: fit-content;
+        margin: auto;
+        justify-self: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }

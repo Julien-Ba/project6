@@ -45,6 +45,18 @@ h1 {
   font-size: 0.5625rem;
 }
 
+.user-info .card-title {
+  color: rgb(211, 87, 60);
+  font-size: 4rem;
+}
+.user-info .card-subtitle {
+  color: rgb(144, 28, 28);
+  font-size: 1.5rem;
+}
+.user-info .card-description {
+  font-size: 1.125rem;
+}
+
 .contact_button {
   color: rgb(255, 255, 255);
   font-size: 1.25rem;
@@ -60,23 +72,13 @@ form label {
   font-size: 2.25rem;
 }
 
-.photographer_section .card a {
-  width: fit-content;
-  height: fit-content;
-  margin: auto;
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.photographer_section .card-img {
+.card-img {
   height: 200px;
   width: 200px;
   border-radius: 50%;
   background-color: rgb(196, 196, 196);
 }
-.photographer_section .card-title {
+.card-title {
   text-wrap: nowrap;
 }
 
@@ -107,6 +109,16 @@ h1 {
   gap: 70px;
   margin-top: 100px;
 }
+.photographer_section .card a {
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 #contact_modal {
   display: none;
@@ -116,6 +128,15 @@ h1 {
   background-color: #fafafa;
   height: 300px;
   margin: 0 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+}
+.photograph-header .user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .contact_button {
