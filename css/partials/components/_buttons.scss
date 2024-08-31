@@ -1,0 +1,11 @@
+@use "../utils";
+
+.contact_button {
+    padding: 11px;
+    width: 170px;
+    height: 70px;
+    border: none;
+    background-color: utils.$clr-primary;
+    border-radius: 5px;
+    cursor: pointer;
+}

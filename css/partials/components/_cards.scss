@@ -2,13 +2,36 @@
 
 .card {
     &-img {
-        height: 200px;
-        width: 200px;
-        border-radius: 50%;
         background-color: utils.$clr-placeholder-img;
     }
 
     &-title {
         text-wrap: nowrap;
+    }
+}
+
+.photographer_section,
+.photograph-header {
+    .card {
+        &-img {
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+        }
+    }
+}
+
+.media-container {
+    .card {
+        &-img {
+            height: 300px;
+            width: 350px;
+        }
+
+        &-likes::after {
+            content: "\f004";
+            font-family: FontAwesome;
+            margin-inline: 0.5rem;
+        }
     }
 }

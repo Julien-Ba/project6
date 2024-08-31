@@ -57,6 +57,19 @@ h1 {
   font-size: 1.125rem;
 }
 
+.filter {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+.filter-container {
+  color: rgb(255, 255, 255);
+}
+
+.media-container .card-title, .media-container .card-likes {
+  color: rgb(144, 28, 28);
+  font-size: 1.5rem;
+}
+
 .contact_button {
   color: rgb(255, 255, 255);
   font-size: 1.25rem;
@@ -73,17 +86,41 @@ form label {
 }
 
 .card-img {
-  height: 200px;
-  width: 200px;
-  border-radius: 50%;
   background-color: rgb(196, 196, 196);
 }
 .card-title {
   text-wrap: nowrap;
 }
 
+.photographer_section .card-img,
+.photograph-header .card-img {
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+}
+
+.media-container .card-img {
+  height: 300px;
+  width: 350px;
+}
+.media-container .card-likes::after {
+  content: "\f004";
+  font-family: FontAwesome;
+  margin-inline: 0.5rem;
+}
+
+.contact_button {
+  padding: 11px;
+  width: 170px;
+  height: 70px;
+  border: none;
+  background-color: rgb(144, 28, 28);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 body {
-  margin: 0;
+  margin-inline: 6.25rem;
 }
 
 header {
@@ -121,17 +158,21 @@ h1 {
 }
 
 #contact_modal {
+  position: fixed;
+  top: 33%;
+  left: 25%;
+  width: 50%;
   display: none;
 }
 
 .photograph-header {
-  background-color: #fafafa;
-  height: 300px;
-  margin: 0 100px;
+  background-color: rgb(250, 250, 250);
+  height: 18.75rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 2rem;
+  margin-block-end: 2rem;
 }
 .photograph-header .user-info {
   display: flex;
@@ -139,25 +180,83 @@ h1 {
   gap: 1.5rem;
 }
 
-.contact_button {
-  padding: 11px;
-  width: 170px;
-  height: 70px;
-  border: none;
-  background-color: #901c1c;
-  border-radius: 5px;
+.filter {
+  width: 16rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  position: relative;
+}
+.filter-container {
+  width: 10rem;
+  padding: 0.5rem 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgb(144, 28, 28);
+  border-radius: 0.3rem;
+}
+.filter-extender {
+  position: absolute;
+  top: 0.75rem;
+  right: 1.25rem;
   cursor: pointer;
+}
+.filter-parameters {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.filter-parameters li {
+  margin-inline-end: 2.5rem;
+  cursor: pointer;
+}
+.filter-parameters .hr {
+  height: 1px;
+  background-color: rgb(255, 255, 255);
+}
+.filter-parameters :not(:nth-child(1)) {
+  display: none;
+}
+
+.media-container {
+  margin-block-start: 3rem;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  justify-content: space-between;
+  align-items: center;
+  grid-gap: 1rem;
+}
+.media-container .card {
+  max-width: 350px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(2, auto);
+  justify-content: center;
+  align-items: center;
+}
+.media-container .card-img {
+  grid-column: span 2;
+}
+.media-container .card-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.media-container .card-likes {
+  justify-self: flex-end;
+  margin-inline-start: 2rem;
 }
 
 .modal {
-  border-radius: 5px;
+  border-radius: 0.3rem;
   background-color: #db8876;
-  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 35px;
+  padding: 2rem;
   margin: auto;
 }
 
@@ -186,14 +285,14 @@ form div {
   flex-direction: column;
   width: 100%;
   align-items: self-start;
-  margin-bottom: 26px;
+  margin-bottom: 1.5rem;
 }
 
 form input {
   width: 100%;
-  height: 68px;
+  height: 4rem;
   border: none;
-  border-radius: 5px;
+  border-radius: 0.3rem;
 }
 
 /*# sourceMappingURL=style.css.map */

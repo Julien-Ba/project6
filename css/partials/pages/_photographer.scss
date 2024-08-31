@@ -1,15 +1,21 @@
+@use "../utils";
+
 #contact_modal {
+    position: fixed;
+    top: 33%;
+    left: 25%;
+    width: 50%;
     display: none;
 }
 
 .photograph-header {
-    background-color: #fafafa;
-    height: 300px;
-    margin: 0 100px;
+    background-color: utils.$clr-bg-dark;
+    height: 18.75rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 2rem;
+    margin-block-end: 2rem;
 
     .user-info {
         display: flex;
@@ -18,25 +24,93 @@
     }
 }
 
-.contact_button {
-    padding: 11px;
-    width: 170px;
-    height: 70px;
-    border: none;
-    background-color: #901c1c;
-    border-radius: 5px;
-    cursor: pointer;
+.filter {
+    width: 16rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    position: relative;
+
+    &-container {
+        width: 10rem;
+        padding: 0.5rem 1rem;
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: utils.$clr-primary;
+        border-radius: 0.3rem;
+    }
+
+    &-extender {
+        position: absolute;
+        top: 0.75rem;
+        right: 1.25rem;
+        cursor: pointer;
+    }
+
+    &-parameters {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        li {
+            margin-inline-end: 2.5rem;
+            cursor: pointer;
+        }
+
+        .hr {
+            height: 1px;
+            background-color: utils.$clr-bg-light;
+        }
+
+        :not(:nth-child(1)) {
+            display: none;
+        }
+    }
+}
+
+.media-container {
+    margin-block-start: 3rem;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: space-between;
+    align-items: center;
+    grid-gap: 1rem;
+
+    .card {
+        max-width: 350px;
+        display: grid;
+        grid-template-columns: repeat(2, auto);
+        grid-template-rows: repeat(2, auto);
+        justify-content: center;
+        align-items: center;
+
+        &-img {
+            grid-column: span 2;
+        }
+
+        &-title {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        &-likes {
+            justify-self: flex-end;
+            margin-inline-start: 2rem;
+        }
+    }
 }
 
 .modal {
-    border-radius: 5px;
+    border-radius: 0.3rem;
     background-color: #db8876;
-    width: 50%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 35px;
+    padding: 2rem;
     margin: auto;
 }
 
@@ -65,12 +139,12 @@ form div {
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
+    margin-bottom: 1.5rem;
 }
 
 form input {
     width: 100%;
-    height: 68px;
+    height: 4rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 0.3rem;
 }
