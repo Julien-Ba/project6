@@ -9,7 +9,7 @@ export class PhotographerTemplate extends PhotographerData {
 
     async getUserCardDOM() {
         const article = document.createElement('article');
-        article.classList.add('card')
+        article.classList.add('card');
 
         const link = document.createElement('a');
         link.href = `./photographer.html?id=${this.getUserData().id}`;
