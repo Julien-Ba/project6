@@ -2,14 +2,11 @@ import { getPhotographers } from '../api/fetch_data.js';
 import { MediaTemplate } from '../templates/media.js';
 import { PhotographerTemplate } from '../templates/photographer.js';
 import { displayModal, closeModal } from '../utils/contactForm.js';
-import { extendFilter, sortFilters } from '../utils/filterMedia.js';
+import { extendFilter, sortFilters, sortMedia } from '../utils/filterMedia.js';
 
 
 
-async function populatePhotographer(photographers, medias) {
-
-    const id = new URLSearchParams(window.location.search).get('id');
-
+async function populatePhotographer(photographers, id) {
     photographers.forEach(async (photographer) => {
         if (photographer.id != id) return;
 
@@ -22,22 +19,31 @@ async function populatePhotographer(photographers, medias) {
         const pictureDOM = await photographerModel.getUserImgDOM();
         photographerHeader.insertAdjacentElement('beforeend', pictureDOM);
     });
+}
 
+async function populateMedia(medias, id) {
+    const mediaPromises = medias
+        .filter(media => media.photographerId == id)
+        .map(async (media) => {
+            const mediaModel = new MediaTemplate(media);
+            return await mediaModel.getMediaDOM();
+        });
+
+    const loadedMedias = await Promise.all(mediaPromises);
     const mediaContainer = document.querySelector('.media-container');
-
-    medias.forEach(async (media) => {
-        if (media.photographerId != id) return;
-        const mediaModel = new MediaTemplate(media);
-
-        const mediaDOM = await mediaModel.getMediaDOM();
+    loadedMedias.forEach(mediaDOM => {
         mediaContainer.insertAdjacentElement('beforeend', mediaDOM);
     });
 
+    const sortByDefault = document.querySelectorAll('.filter-parameters > li')[0];
+    sortMedia(sortByDefault);
 }
 
 async function init() {
     const { photographers, media } = await getPhotographers();
-    populatePhotographer(photographers, media);
+    const id = new URLSearchParams(window.location.search).get('id');
+    populatePhotographer(photographers, id);
+    populateMedia(media, id);
 }
 
 init();
