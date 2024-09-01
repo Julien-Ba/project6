@@ -47,6 +47,42 @@ export function sortFilters(event) {
     }
     parent.appendChild(fragment);
 
-    // return extendFilter(extender);
+    // return extendFilter(extender)
     extender.click();
+
+    // sort media by event.target
+    sortMedia(target);
+}
+
+export function sortMedia(parameter) {
+    const medias = Array.from(document.querySelectorAll('.media-container > .card'));
+    switch (parameter.textContent) {
+        case 'Titre':
+            medias.sort((a, b) => {
+                const titleA = a.querySelector('.card-title').textContent.toLowerCase();
+                const titleB = b.querySelector('.card-title').textContent.toLowerCase();
+                return titleA.localeCompare(titleB);
+            });
+            break;
+        case 'Popularité':
+            medias.sort((a, b) => {
+                const likesA = Number(a.querySelector('.card-likes').textContent);
+                const likesB = Number(b.querySelector('.card-likes').textContent);
+                return likesB - likesA;
+            });
+            break;
+        case 'Date':
+            break;
+        default:
+            console.warn('Invalid sorting parameter');
+    }
+
+    const fragment = document.createDocumentFragment();
+    medias.forEach(media => fragment.appendChild(media));
+
+    const parent = document.querySelector('.media-container');
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild);
+    }
+    parent.appendChild(fragment);
 }
