@@ -4,6 +4,7 @@ import { PhotographerTemplate } from '../templates/photographer.js';
 import { displayModal, closeModal } from '../utils/contactForm.js';
 import { likesCounter } from '../utils/counterLikes.js';
 import { extendFilter, sortFilters, sortMedia } from '../utils/filterMedia.js';
+import { openLightbox, closeLightbox, switchLightbox } from '../utils/lightbox.js';
 
 
 
@@ -68,3 +69,11 @@ const filterParameters = document.querySelectorAll('.filter-parameters > li');
 filterParameters.forEach(filter => filter.addEventListener('click', sortFilters));
 
 document.addEventListener('click', likesCounter);
+
+document.addEventListener('click', openLightbox);
+
+const closeLightboxBtn = document.querySelector('.lightbox-btn > .fa-x');
+closeLightboxBtn.addEventListener('click', closeLightbox);
+
+const switchLightboxBtns = document.querySelectorAll('.switch-lightbox');
+switchLightboxBtns.forEach(btn => btn.addEventListener('click', switchLightbox));

@@ -73,6 +73,11 @@ h1 {
   font-size: 1.5rem;
 }
 
+.lightbox-btn {
+  color: rgb(144, 28, 28);
+  font-size: 2rem;
+}
+
 .user-numbers {
   color: rgb(0, 0, 0);
   font-size: 1.5rem;
@@ -114,8 +119,15 @@ form label {
 }
 
 .media-container .card-img {
-  height: 300px;
   width: 350px;
+  height: 300px;
+  cursor: pointer;
+}
+.media-container .card-img[data-lightbox_focus=true] {
+  width: clamp(50vw, 90vw, 66rem);
+  height: auto;
+  aspect-ratio: 35/30;
+  cursor: default;
 }
 .media-container .card-likes {
   cursor: pointer;
@@ -174,6 +186,38 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.background {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background-color: rgb(255, 255, 255);
+}
+.background[data-lightbox_opened=true] {
+  display: block;
+}
+.background .lightbox-btn {
+  width: 2rem;
+  height: 2rem;
+  position: fixed;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+.background .lightbox-btn:has(.fa-x) {
+  inset: 2rem 2rem 0 auto;
+}
+.background .lightbox-btn:has(.fa-chevron-left) {
+  inset: 0 2rem;
+  margin-block: auto;
+}
+.background .lightbox-btn:has(.fa-chevron-right) {
+  inset: 0 2rem 0 auto;
+  margin-block: auto;
 }
 
 #contact_modal {
@@ -266,6 +310,12 @@ h1 {
 .media-container .card-likes {
   justify-self: flex-end;
   margin-inline-start: 2rem;
+}
+.media-container .card-img[data-lightbox_focus=true] {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  z-index: 11;
 }
 
 .user-numbers {

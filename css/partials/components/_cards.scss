@@ -30,8 +30,16 @@
 .media-container {
     .card {
         &-img {
-            height: 300px;
             width: 350px;
+            height: 300px;
+            cursor: pointer;
+        }
+
+        &-img[data-lightbox_focus="true"] {
+            width: clamp(50vw, 90vw, 66rem);
+            height: auto;
+            aspect-ratio: 35/30;
+            cursor: default;
         }
 
         &-likes {

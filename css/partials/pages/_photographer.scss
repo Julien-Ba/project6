@@ -1,5 +1,42 @@
 @use "../utils";
 
+.background {
+    display: none;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    inset: 0;
+    z-index: 10;
+    background-color: utils.$clr-bg-light;
+
+    &[data-lightbox_opened="true"] {
+        display: block;
+    }
+
+    .lightbox-btn {
+        width: 2rem;
+        height: 2rem;
+        position: fixed;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        &:has(.fa-x) {
+            inset: 2rem 2rem 0 auto;
+        }
+
+        &:has(.fa-chevron-left) {
+            inset: 0 2rem;
+            margin-block: auto;
+        }
+
+        &:has(.fa-chevron-right) {
+            inset: 0 2rem 0 auto;
+            margin-block: auto;
+        }
+    }
+}
+
 #contact_modal {
     position: fixed;
     top: 33%;
@@ -99,6 +136,13 @@
         &-likes {
             justify-self: flex-end;
             margin-inline-start: 2rem;
+        }
+
+        &-img[data-lightbox_focus="true"] {
+            position: fixed;
+            inset: 0;
+            margin: auto;
+            z-index: 11;
         }
     }
 }
