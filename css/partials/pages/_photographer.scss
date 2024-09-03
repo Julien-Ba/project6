@@ -71,7 +71,7 @@
 }
 
 .media-container {
-    margin-block-start: 3rem;
+    margin-block: 3rem 5rem;
     display: grid;
     grid-template-columns: repeat(3, auto);
     justify-content: space-between;
@@ -101,6 +101,17 @@
             margin-inline-start: 2rem;
         }
     }
+}
+
+.user-numbers {
+    position: fixed;
+    bottom: 0;
+    right: 2rem;
+    padding: 1rem 2rem;
+    border-radius: 0.3rem 0.3rem 0 0;
+    background-color: utils.$clr-tertiary;
+    display: flex;
+    gap: 4rem;
 }
 
 .modal {

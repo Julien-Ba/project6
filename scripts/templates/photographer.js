@@ -35,6 +35,16 @@ export class PhotographerTemplate extends PhotographerData {
         return div;
     }
 
+    async getUserNumbersDOM() {
+        const div = document.createElement('div');
+        div.classList.add('user-numbers');
+
+        div.appendChild(await this.getUserLikesDOM());
+        div.appendChild(this.getUserPriceDOM());
+
+        return div;
+    }
+
     async getUserImgDOM() {
         const img = document.createElement('img');
         img.src = await this.getUserPicture();
@@ -70,6 +80,32 @@ export class PhotographerTemplate extends PhotographerData {
         p.textContent = `${this.getUserData().price}€/jour`;
         p.classList.add('card-price');
         return p;
+    }
+
+    getUserLikesDOM() {
+        return new Promise((resolve) => {
+            const observer = new MutationObserver((mutations, obs) => {
+                const cardLikes = document.querySelectorAll('.card-likes');
+                if (cardLikes.length > 0) {
+                    obs.disconnect();
+
+                    const p = document.createElement('p');
+                    let likes = 0;
+
+                    cardLikes.forEach(cardLike => likes += +cardLike.textContent);
+
+                    p.textContent = likes;
+                    p.classList.add('card-likes', 'total-likes');
+
+                    resolve(p);
+                }
+            });
+
+            observer.observe(document.querySelector('#main'), {
+                subtree: true,
+                childList: true
+            });
+        });
     }
 
 }

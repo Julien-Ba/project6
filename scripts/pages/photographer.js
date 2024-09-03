@@ -2,15 +2,17 @@ import { getPhotographers } from '../api/fetch_data.js';
 import { MediaTemplate } from '../templates/media.js';
 import { PhotographerTemplate } from '../templates/photographer.js';
 import { displayModal, closeModal } from '../utils/contactForm.js';
+import { likesCounter } from '../utils/counterLikes.js';
 import { extendFilter, sortFilters, sortMedia } from '../utils/filterMedia.js';
 
 
 
 async function populatePhotographer(photographers, id) {
-    photographers.forEach(async (photographer) => {
-        if (photographer.id != id) return;
+    for (const photographer of photographers) {
+        if (photographer.id != id) continue;
 
         const photographerHeader = document.querySelector('.photograph-header');
+        const main = document.querySelector('#main');
         const photographerModel = new PhotographerTemplate(photographer);
 
         const infoDOM = photographerModel.getUserInfoDOM();
@@ -18,7 +20,12 @@ async function populatePhotographer(photographers, id) {
 
         const pictureDOM = await photographerModel.getUserImgDOM();
         photographerHeader.insertAdjacentElement('beforeend', pictureDOM);
-    });
+
+        const numbersDOM = await photographerModel.getUserNumbersDOM();
+        main.insertAdjacentElement('beforeend', numbersDOM);
+
+        break;
+    }
 }
 
 async function populateMedia(medias, id) {
@@ -57,6 +64,7 @@ closeModalBtn.addEventListener('click', closeModal);
 const extendFilterBtn = document.querySelector('.filter-extender');
 extendFilterBtn.addEventListener('click', extendFilter);
 
-const filterContainer = document.querySelector('.filter-parameters');
-const filterParameters = filterContainer.querySelectorAll(':scope > li');
-filterParameters.forEach((filter) => filter.addEventListener('click', sortFilters));
+const filterParameters = document.querySelectorAll('.filter-parameters > li');
+filterParameters.forEach(filter => filter.addEventListener('click', sortFilters));
+
+document.addEventListener('click', likesCounter);

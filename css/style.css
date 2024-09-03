@@ -39,9 +39,11 @@ h1 {
   font-size: 0.8125rem;
 }
 .photographer_section .card-description {
+  color: rgb(0, 0, 0);
   font-size: 0.625rem;
 }
 .photographer_section .card-price {
+  color: rgb(0, 0, 0);
   font-size: 0.5625rem;
 }
 
@@ -54,6 +56,7 @@ h1 {
   font-size: 1.5rem;
 }
 .user-info .card-description {
+  color: rgb(0, 0, 0);
   font-size: 1.125rem;
 }
 
@@ -70,6 +73,11 @@ h1 {
   font-size: 1.5rem;
 }
 
+.user-numbers {
+  color: rgb(0, 0, 0);
+  font-size: 1.5rem;
+}
+
 .contact_button {
   color: rgb(255, 255, 255);
   font-size: 1.25rem;
@@ -77,6 +85,7 @@ h1 {
 }
 
 .modal header h2 {
+  color: rgb(0, 0, 0);
   font-size: 4rem;
 }
 
@@ -91,6 +100,11 @@ form label {
 .card-title {
   text-wrap: nowrap;
 }
+.card-likes::after {
+  content: "\f004";
+  font-family: "FontAwesome";
+  margin-inline: 0.5rem;
+}
 
 .photographer_section .card-img,
 .photograph-header .card-img {
@@ -103,10 +117,15 @@ form label {
   height: 300px;
   width: 350px;
 }
+.media-container .card-likes {
+  cursor: pointer;
+  transition: font-family 500ms;
+}
 .media-container .card-likes::after {
-  content: "\f004";
-  font-family: FontAwesome;
-  margin-inline: 0.5rem;
+  font-family: "Font Awesome 6 Free";
+}
+.media-container .card-likes[data-liked=true]::after {
+  font-family: "FontAwesome";
 }
 
 .contact_button {
@@ -221,7 +240,7 @@ h1 {
 }
 
 .media-container {
-  margin-block-start: 3rem;
+  margin-block: 3rem 5rem;
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: space-between;
@@ -247,6 +266,17 @@ h1 {
 .media-container .card-likes {
   justify-self: flex-end;
   margin-inline-start: 2rem;
+}
+
+.user-numbers {
+  position: fixed;
+  bottom: 0;
+  right: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 0.3rem 0.3rem 0 0;
+  background-color: rgb(219, 136, 118);
+  display: flex;
+  gap: 4rem;
 }
 
 .modal {

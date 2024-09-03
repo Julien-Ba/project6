@@ -18,9 +18,11 @@ h1 {
         font-size: 0.8125rem;
     }
     &-description {
+        color: utils.$clr-txt-darkest;
         font-size: 0.625rem;
     }
     &-price {
+        color: utils.$clr-txt-darkest;
         font-size: 0.5625rem;
     }
 }
@@ -35,6 +37,7 @@ h1 {
         font-size: 1.5rem;
     }
     &-description {
+        color: utils.$clr-txt-darkest;
         font-size: 1.125rem;
     }
 }
@@ -56,6 +59,11 @@ h1 {
     }
 }
 
+.user-numbers {
+    color: utils.$clr-txt-darkest;
+    font-size: 1.5rem;
+}
+
 .contact_button {
     color: utils.$clr-txt-light;
     font-size: 1.25rem;
@@ -63,6 +71,7 @@ h1 {
 }
 
 .modal header h2 {
+    color: utils.$clr-txt-darkest;
     font-size: 4rem;
 }
 

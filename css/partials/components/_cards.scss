@@ -8,6 +8,12 @@
     &-title {
         text-wrap: nowrap;
     }
+
+    &-likes::after {
+        content: "\f004";
+        font-family: "FontAwesome";
+        margin-inline: 0.5rem;
+    }
 }
 
 .photographer_section,
@@ -28,10 +34,17 @@
             width: 350px;
         }
 
-        &-likes::after {
-            content: "\f004";
-            font-family: FontAwesome;
-            margin-inline: 0.5rem;
+        &-likes {
+            cursor: pointer;
+            transition: font-family 500ms;
+
+            &::after {
+                font-family: "Font Awesome 6 Free";
+            }
+
+            &[data-liked="true"]::after {
+                font-family: "FontAwesome";
+            }
         }
     }
 }
