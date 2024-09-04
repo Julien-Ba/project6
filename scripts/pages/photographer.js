@@ -14,6 +14,8 @@ async function populatePhotographer(photographers, id) {
 
         const photographerHeader = document.querySelector('.photograph-header');
         const main = document.querySelector('#main');
+        const modalTitle = document.querySelector('#contact_modal h2');
+
         const photographerModel = new PhotographerTemplate(photographer);
 
         const infoDOM = photographerModel.getUserInfoDOM();
@@ -21,6 +23,10 @@ async function populatePhotographer(photographers, id) {
 
         const pictureDOM = await photographerModel.getUserImgDOM();
         photographerHeader.insertAdjacentElement('beforeend', pictureDOM);
+
+        const contactDOM = photographerModel.getUserData().name;
+        modalTitle.textContent += `\n ${contactDOM}`;
+
 
         const numbersDOM = await photographerModel.getUserNumbersDOM();
         main.insertAdjacentElement('beforeend', numbersDOM);
