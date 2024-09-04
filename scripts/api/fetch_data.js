@@ -13,3 +13,11 @@ export async function getPhotographers() {
         console.error(error.message);
     }
 }
+
+export async function getPhotographerByID(photographers, id) {
+    return photographers.find(photographer => photographer.id == id);
+}
+
+export async function getMediaByPhotographerID(medias, id) {
+    return medias.filter(media => media.photographerId == id);
+}

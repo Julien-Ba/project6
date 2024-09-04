@@ -1,4 +1,4 @@
-import { getPhotographers } from '../api/fetch_data.js';
+import { getMediaByPhotographerID, getPhotographerByID, getPhotographers } from '../api/fetch_data.js';
 import { MediaTemplate } from '../templates/media.js';
 import { PhotographerTemplate } from '../templates/photographer.js';
 import { displayModal, closeModal, validateForm } from '../utils/contactForm.js';
@@ -8,38 +8,31 @@ import { openLightbox, closeLightbox, switchLightbox } from '../utils/lightbox.j
 
 
 
-async function populatePhotographer(photographers, id) {
-    for (const photographer of photographers) {
-        if (photographer.id != id) continue;
-        const photographerModel = new PhotographerTemplate(photographer);
+async function populatePhotographer(photographer) {
+    const photographerModel = new PhotographerTemplate(photographer);
 
-        const photographerHeader = document.querySelector('.photograph-header');
-        const main = document.querySelector('#main');
-        const modalTitle = document.querySelector('#contact_modal h2');
+    const photographerHeader = document.querySelector('.photograph-header');
+    const main = document.querySelector('#main');
+    const modalTitle = document.querySelector('#contact_modal h2');
 
-        const infoDOM = photographerModel.getUserInfoDOM();
-        photographerHeader.insertAdjacentElement('afterbegin', infoDOM);
+    const infoDOM = photographerModel.getUserInfoDOM();
+    photographerHeader.insertAdjacentElement('afterbegin', infoDOM);
 
-        const pictureDOM = await photographerModel.getUserImgDOM();
-        photographerHeader.insertAdjacentElement('beforeend', pictureDOM);
+    const pictureDOM = await photographerModel.getUserImgDOM();
+    photographerHeader.insertAdjacentElement('beforeend', pictureDOM);
 
-        const contactName = photographerModel.getUserData().name;
-        modalTitle.textContent += `\n ${contactName}`;
+    const contactName = photographerModel.getUserData().name;
+    modalTitle.textContent += `\n ${contactName}`;
 
-        const numbersDOM = await photographerModel.getUserNumbersDOM();
-        main.insertAdjacentElement('beforeend', numbersDOM);
-
-        break;
-    }
+    const numbersDOM = await photographerModel.getUserNumbersDOM();
+    main.insertAdjacentElement('beforeend', numbersDOM);
 }
 
-async function populateMedia(medias, id) {
-    const mediaPromises = medias
-        .filter(media => media.photographerId == id)
-        .map(async (media) => {
-            const mediaModel = new MediaTemplate(media);
-            return await mediaModel.getMediaDOM();
-        });
+async function populateMedia(medias) {
+    const mediaPromises = medias.map(media => {
+        const mediaModel = new MediaTemplate(media);
+        return mediaModel.getMediaDOM();
+    });
 
     const loadedMedias = await Promise.all(mediaPromises);
     const mediaContainer = document.querySelector('.media-container');
@@ -54,8 +47,8 @@ async function populateMedia(medias, id) {
 async function init() {
     const { photographers, media } = await getPhotographers();
     const id = new URLSearchParams(window.location.search).get('id');
-    populatePhotographer(photographers, id);
-    populateMedia(media, id);
+    populatePhotographer(await getPhotographerByID(photographers, id));
+    populateMedia(await getMediaByPhotographerID(media, id));
 }
 
 init();
