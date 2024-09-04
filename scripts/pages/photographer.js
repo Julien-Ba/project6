@@ -1,4 +1,5 @@
 import { getMediaByPhotographerID, getPhotographerByID, getPhotographers } from '../api/fetch_data.js';
+import { PhotographerData, MediaData } from '../api/verify_data.js';
 import { MediaTemplate } from '../templates/media.js';
 import { PhotographerTemplate } from '../templates/photographer.js';
 import { sortMedia } from '../utils/filterMedia.js';
@@ -6,7 +7,10 @@ import { sortMedia } from '../utils/filterMedia.js';
 
 
 async function populatePhotographer(photographer) {
-    const photographerModel = new PhotographerTemplate(photographer);
+    const photographerData = new PhotographerData(photographer);
+    const data = photographerData.getUserData();
+    const picture = photographerData.getUserPicture();
+    const photographerModel = new PhotographerTemplate(data, picture);
 
     const photographerHeader = document.querySelector('.photograph-header');
     const main = document.querySelector('#main');
@@ -18,7 +22,7 @@ async function populatePhotographer(photographer) {
     const pictureDOM = await photographerModel.getUserImgDOM();
     photographerHeader.insertAdjacentElement('beforeend', pictureDOM);
 
-    const contactName = photographerModel.getUserData().name;
+    const contactName = data.name;
     modalTitle.textContent += `\n ${contactName}`;
 
     const numbersDOM = await photographerModel.getUserNumbersDOM();
@@ -26,8 +30,11 @@ async function populatePhotographer(photographer) {
 }
 
 async function populateMedia(medias) {
-    const mediaPromises = medias.map(media => {
-        const mediaModel = new MediaTemplate(media);
+    const mediaPromises = medias.map(async media => {
+        const mediaData = new MediaData(media);
+        const data = mediaData.getMediaData();
+        const picture = await mediaData.getMedia();
+        const mediaModel = new MediaTemplate(data, picture);
         return mediaModel.getMediaDOM();
     });
 

@@ -1,10 +1,14 @@
-import { PhotographerData } from "../api/verify_data.js";
+export class PhotographerTemplate {
 
+    constructor(data, picture) {
+        this.picture = picture;
 
-export class PhotographerTemplate extends PhotographerData {
-
-    constructor(data) {
-        super(data);
+        this.id = data.id;
+        this.name = data.name;
+        this.country = data.country;
+        this.city = data.city;
+        this.tagline = data.tagline;
+        this.price = data.price;
     }
 
     async getUserCardDOM() {
@@ -12,7 +16,7 @@ export class PhotographerTemplate extends PhotographerData {
         article.classList.add('card');
 
         const link = document.createElement('a');
-        link.href = `./photographer.html?id=${this.getUserData().id}`;
+        link.href = `./photographer.html?id=${this.id}`;
         article.appendChild(link);
 
         link.appendChild(await this.getUserImgDOM());
@@ -47,8 +51,8 @@ export class PhotographerTemplate extends PhotographerData {
 
     async getUserImgDOM() {
         const img = document.createElement('img');
-        img.src = await this.getUserPicture();
-        img.alt = `Portrait of ${this.getUserData().name}`;
+        img.src = await this.picture;
+        img.alt = `Portrait of ${this.name}`;
         img.loading = 'lazy';
         img.classList.add('card-img');
         return img;
@@ -56,28 +60,28 @@ export class PhotographerTemplate extends PhotographerData {
 
     getUserNameDOM() {
         const h2 = document.createElement('h2');
-        h2.textContent = this.getUserData().name;
+        h2.textContent = this.name;
         h2.classList.add('card-title');
         return h2;
     }
 
     getUserLocationDOM() {
         const h3 = document.createElement('h3');
-        h3.textContent = `${this.getUserData().city}, ${this.getUserData().country}`;
+        h3.textContent = `${this.city}, ${this.country}`;
         h3.classList.add('card-subtitle');
         return h3;
     }
 
     getUserTaglineDOM() {
         const p = document.createElement('p');
-        p.textContent = this.getUserData().tagline;
+        p.textContent = this.tagline;
         p.classList.add('card-description');
         return p;
     }
 
     getUserPriceDOM() {
         const p = document.createElement('p');
-        p.textContent = `${this.getUserData().price}€/jour`;
+        p.textContent = `${this.price}€/jour`;
         p.classList.add('card-price');
         return p;
     }
