@@ -1,16 +1,24 @@
-export function openLightbox(event) {
+document.addEventListener('click', openLightbox);
+
+const closeLightboxBtn = document.querySelector('.lightbox-btn > .fa-x');
+closeLightboxBtn.addEventListener('click', closeLightbox);
+
+const switchLightboxBtns = document.querySelectorAll('.switch-lightbox');
+switchLightboxBtns.forEach(btn => btn.addEventListener('click', switchLightbox));
+
+function openLightbox(event) {
     const media = event.target;
     if (!media.classList.contains('card-img') || !media.parentNode.classList.contains('card')) return;
     document.querySelector('.background').dataset.lightbox_opened = 'true';
     media.dataset.lightbox_focus = 'true';
 }
 
-export function closeLightbox() {
+function closeLightbox() {
     document.querySelector('.background').dataset.lightbox_opened = 'false';
     document.querySelectorAll('.card > .card-img').forEach(img => img.dataset.lightbox_focus = 'false');
 }
 
-export function switchLightbox(event) {
+function switchLightbox(event) {
     const side = event.target;
     const medias = document.querySelectorAll('.media-container .card-img');
     const len = medias.length;

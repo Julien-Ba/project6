@@ -1,10 +1,7 @@
 import { getMediaByPhotographerID, getPhotographerByID, getPhotographers } from '../api/fetch_data.js';
 import { MediaTemplate } from '../templates/media.js';
 import { PhotographerTemplate } from '../templates/photographer.js';
-import { displayModal, closeModal, validateForm } from '../utils/contactForm.js';
-import { likesCounter } from '../utils/counterLikes.js';
-import { extendFilter, sortFilters, sortMedia } from '../utils/filterMedia.js';
-import { openLightbox, closeLightbox, switchLightbox } from '../utils/lightbox.js';
+import { sortMedia } from '../utils/filterMedia.js';
 
 
 
@@ -52,28 +49,3 @@ async function init() {
 }
 
 init();
-
-const openModalBtn = document.querySelector('.contact_button');
-openModalBtn.addEventListener('click', displayModal);
-
-const closeModalBtn = document.querySelector('.close-modal-btn');
-closeModalBtn.addEventListener('click', closeModal);
-
-const submitForm = document.querySelector('form');
-submitForm.addEventListener('submit', validateForm);
-
-const extendFilterBtn = document.querySelector('.filter-extender');
-extendFilterBtn.addEventListener('click', extendFilter);
-
-const filterParameters = document.querySelectorAll('.filter-parameters > li');
-filterParameters.forEach(filter => filter.addEventListener('click', sortFilters));
-
-document.addEventListener('click', likesCounter);
-
-document.addEventListener('click', openLightbox);
-
-const closeLightboxBtn = document.querySelector('.lightbox-btn > .fa-x');
-closeLightboxBtn.addEventListener('click', closeLightbox);
-
-const switchLightboxBtns = document.querySelectorAll('.switch-lightbox');
-switchLightboxBtns.forEach(btn => btn.addEventListener('click', switchLightbox));

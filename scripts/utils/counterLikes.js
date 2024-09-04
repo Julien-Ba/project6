@@ -1,4 +1,6 @@
-export function likesCounter(event) {
+document.addEventListener('click', likesCounter);
+
+function likesCounter(event) {
     const likes = event.target;
 
     if (!likes.classList.contains('card-likes')) return;

@@ -1,14 +1,23 @@
-export function displayModal() {
+const openModalBtn = document.querySelector('.contact_button');
+openModalBtn.addEventListener('click', displayModal);
+
+const closeModalBtn = document.querySelector('.close-modal-btn');
+closeModalBtn.addEventListener('click', closeModal);
+
+const submitForm = document.querySelector('form');
+submitForm.addEventListener('submit', validateForm);
+
+function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
 }
 
-export function closeModal() {
+function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
 
-export function validateForm(event) {
+function validateForm(event) {
     event.preventDefault();
     event.target.reset();
     closeModal();

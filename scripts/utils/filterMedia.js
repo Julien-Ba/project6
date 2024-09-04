@@ -1,4 +1,14 @@
-export function extendFilter(event) {
+export { sortMedia };
+
+
+
+const extendFilterBtn = document.querySelector('.filter-extender');
+extendFilterBtn.addEventListener('click', extendFilter);
+
+const filterParameters = document.querySelectorAll('.filter-parameters > li');
+filterParameters.forEach(filter => filter.addEventListener('click', sortFilters));
+
+function extendFilter(event) {
     const btn = event.target;
     if (btn.classList.contains('fa-chevron-down')) {
         btn.classList.remove('fa-chevron-down');
@@ -15,7 +25,7 @@ export function extendFilter(event) {
     document.querySelector('.filter-parameters').firstElementChild.style.display = 'block';
 }
 
-export function sortFilters(event) {
+function sortFilters(event) {
     const target = event.target;
     const parent = target.parentElement;
     const filters = Array.from(parent.querySelectorAll(':scope > li'));
@@ -54,7 +64,7 @@ export function sortFilters(event) {
     sortMedia(target);
 }
 
-export function sortMedia(parameter) {
+function sortMedia(parameter) {
     const medias = Array.from(document.querySelectorAll('.media-container > .card'));
     switch (parameter.textContent) {
         case 'Titre':
