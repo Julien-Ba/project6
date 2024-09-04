@@ -1,7 +1,7 @@
 import { getPhotographers } from '../api/fetch_data.js';
 import { MediaTemplate } from '../templates/media.js';
 import { PhotographerTemplate } from '../templates/photographer.js';
-import { displayModal, closeModal } from '../utils/contactForm.js';
+import { displayModal, closeModal, validateForm } from '../utils/contactForm.js';
 import { likesCounter } from '../utils/counterLikes.js';
 import { extendFilter, sortFilters, sortMedia } from '../utils/filterMedia.js';
 import { openLightbox, closeLightbox, switchLightbox } from '../utils/lightbox.js';
@@ -61,6 +61,9 @@ openModalBtn.addEventListener('click', displayModal);
 
 const closeModalBtn = document.querySelector('.close-modal-btn');
 closeModalBtn.addEventListener('click', closeModal);
+
+const submitForm = document.querySelector('form');
+submitForm.addEventListener('submit', validateForm);
 
 const extendFilterBtn = document.querySelector('.filter-extender');
 extendFilterBtn.addEventListener('click', extendFilter);

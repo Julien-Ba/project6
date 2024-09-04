@@ -7,3 +7,9 @@ export function closeModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "none";
 }
+
+export function validateForm(event) {
+    event.preventDefault();
+    event.target.reset();
+    closeModal();
+}
