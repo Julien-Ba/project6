@@ -215,3 +215,16 @@ form :where(input, textarea) {
 form textarea {
     height: 7rem;
 }
+
+form :where(input:not([type="submit"]), textarea):focus {
+    outline: 2px solid utils.$clr-primary;
+}
+
+form input[type="submit"]:focus {
+    outline: 2px solid utils.$clr-bg-light;
+}
+
+.modal .close-modal-btn:focus {
+    filter: drop-shadow(2px 2px 1px utils.$clr-primary);
+    outline: none;
+}

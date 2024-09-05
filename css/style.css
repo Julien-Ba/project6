@@ -387,4 +387,17 @@ form textarea {
   height: 7rem;
 }
 
+form :where(input:not([type=submit]), textarea):focus {
+  outline: 2px solid rgb(144, 28, 28);
+}
+
+form input[type=submit]:focus {
+  outline: 2px solid rgb(255, 255, 255);
+}
+
+.modal .close-modal-btn:focus {
+  filter: drop-shadow(2px 2px 1px rgb(144, 28, 28));
+  outline: none;
+}
+
 /*# sourceMappingURL=style.css.map */
