@@ -37,6 +37,7 @@ export class MediaTemplate {
         const p = document.createElement('p');
         p.textContent = this.likes;
         p.classList.add('card-likes');
+        p.ariaLabel = 'number of likes';
         return p;
     }
 

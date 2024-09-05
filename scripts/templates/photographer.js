@@ -17,6 +17,7 @@ export class PhotographerTemplate {
 
         const link = document.createElement('a');
         link.href = `./photographer.html?id=${this.id}`;
+        link.ariaLabel = 'photographer page';
         article.appendChild(link);
 
         link.appendChild(await this.getUserImgDOM());
@@ -100,6 +101,7 @@ export class PhotographerTemplate {
 
                     p.textContent = likes;
                     p.classList.add('card-likes', 'total-likes');
+                    p.ariaLabel = 'number of likes';
 
                     resolve(p);
                 }
