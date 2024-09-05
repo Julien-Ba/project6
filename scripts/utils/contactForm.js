@@ -9,12 +9,14 @@ submitForm.addEventListener('submit', validateForm);
 
 function displayModal() {
     const modal = document.getElementById("contact_modal");
-    modal.style.display = "block";
+    modal.style.display = 'block';
+    modal.ariaHidden = 'false';
 }
 
 function closeModal() {
     const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
+    modal.style.display = 'none';
+    modal.ariaHidden = 'true';
 }
 
 function validateForm(event) {

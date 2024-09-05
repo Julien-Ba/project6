@@ -9,12 +9,16 @@ switchLightboxBtns.forEach(btn => btn.addEventListener('click', switchLightbox))
 function openLightbox(event) {
     const media = event.target;
     if (!media.classList.contains('card-img') || !media.parentNode.classList.contains('card')) return;
-    document.querySelector('.background').dataset.lightbox_opened = 'true';
+    const container = document.querySelector('.background');
+    container.dataset.lightbox_opened = 'true';
+    container.ariaHidden = 'false';
     media.dataset.lightbox_focus = 'true';
 }
 
 function closeLightbox() {
-    document.querySelector('.background').dataset.lightbox_opened = 'false';
+    const container = document.querySelector('.background');
+    container.dataset.lightbox_opened = 'false';
+    container.ariaHidden = 'true';
     document.querySelectorAll('.card > .card-img').forEach(img => img.dataset.lightbox_focus = 'false');
 }
 
