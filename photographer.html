@@ -13,22 +13,24 @@
 
 <body>
     <div class="background">
-        <button class="lightbox-btn">
+        <button class="lightbox-btn" aria-label="close media">
             <i class="fa-solid fa-x"></i>
         </button>
-        <button class="lightbox-btn">
+        <button class="lightbox-btn" aria-label="switch to the previous media">
             <i class="fa-solid fa-chevron-left switch-lightbox btn-previous"></i>
         </button>
-        <button class="lightbox-btn">
+        <button class="lightbox-btn" aria-label="switch to the next media">
             <i class="fa-solid fa-chevron-right switch-lightbox btn-next"></i>
         </button>
     </div>
     <header>
-        <img src="assets/images/logo.png" class="logo">
+        <img src="assets/images/logo.png" class="logo" alt="fisheye logo">
     </header>
     <main id="main">
         <section class="photograph-header">
-            <button class="contact_button">Contactez-moi</button>
+            <button class="contact_button" aria-label="open contact form">
+                Contactez-moi
+            </button>
         </section>
         <div class="filter">
             <p class="filter-title">Trier par</p>
@@ -68,7 +70,7 @@
                     <label for="msg">Votre message</label>
                     <textarea id="msg" name="msg"></textarea>
                 </div>
-                <input type="submit" value="Envoyer" class="contact_button">
+                <input type="submit" value="Envoyer" class="contact_button" aria-label="submit">
             </form>
         </div>
     </div>
