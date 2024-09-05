@@ -1,15 +1,44 @@
-const lightbox = document.querySelector('.background');
+import { trapFocus } from "../api/accessibility.js";
 
+
+
+
+
+// ----- Variables ----- \\
+
+const lightbox = document.querySelector('.background');
+const focusableEls = lightbox.querySelectorAll('button');
 const mediaContainer = document.querySelector('.media-container');
+const closeLightboxBtn = lightbox.querySelector('button:has(.fa-x)');
+const switchLightboxBtns = lightbox.querySelectorAll('button:has(.switch-lightbox)');
+const previousMediaBtn = lightbox.querySelector('button:has(.btn-previous)');
+const nextMediaBtn = lightbox.querySelector('button:has(.btn-next)');
+
+
+
+
+
+// ----- Event Listeners ----- \\
+
+// open the lightbox
 mediaContainer.addEventListener('click', openLightbox);
 
-const closeLightboxBtn = lightbox.querySelector('.fa-x');
+// close the lightbox
 closeLightboxBtn.addEventListener('click', closeLightbox);
 lightbox.addEventListener('keydown', escLightbox);
 
-const switchLightboxBtns = lightbox.querySelectorAll('.switch-lightbox');
+// switch media
 switchLightboxBtns.forEach(btn => btn.addEventListener('click', switchLightbox));
 lightbox.addEventListener('keydown', switchLightbox);
+
+// accessibility
+lightbox.addEventListener('keydown', event => trapFocus(event, focusableEls));
+
+
+
+
+
+// ----- Functions ----- \\
 
 function openLightbox(event) {
     const media = event.target;
@@ -17,6 +46,7 @@ function openLightbox(event) {
     lightbox.dataset.lightbox_opened = 'true';
     lightbox.ariaHidden = 'false';
     media.dataset.lightbox_focus = 'true';
+    nextMediaBtn.focus();
 }
 
 function closeLightbox() {
@@ -27,8 +57,8 @@ function closeLightbox() {
 
 function escLightbox(event) {
     // Close lightbox when escape key is pressed
-    const escKey = 27;
-    if (lightbox.ariaHidden === 'false' && event.keyCode === escKey)
+    const isEscPressed = (event.key === 'Escape' || event.keyCode === 27);
+    if (lightbox.ariaHidden === 'false' && isEscPressed)
         closeLightbox();
 }
 
@@ -59,12 +89,23 @@ function switchLightbox(event) {
 
 function switchSide(event) {
     //check if a switch button has been clicked or the keys left/right have been pressed
-    const leftKey = 37;
-    const rightKey = 39;
-    if (lightbox.ariaHidden === 'true' && (event.keyCode !== leftKey || event.keyCode !== rightKey))
+
+    if (lightbox.ariaHidden === 'true')
         return;
+
+    const isLeftPressed = event.key === 'ArrowLeft' || event.keyCode === 37;
+    const isRightPressed = event.key === 'ArrowRight' || event.keyCode === 39;
+    const isPreviousClicked = event.target === previousMediaBtn;
+    const isNextClicked = event.target === nextMediaBtn;
+
+    if (event.type === 'keydown' && !isLeftPressed && !isRightPressed)
+        return;
+    if (event.type === 'click' && !isPreviousClicked && !isNextClicked)
+        return;
+
     let side = 'right';
-    if (event.target.classList.contains('btn-previous') || event.keyCode === leftKey)
+    if (isPreviousClicked || isLeftPressed)
         side = 'left';
+
     return side;
 }
