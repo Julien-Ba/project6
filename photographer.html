@@ -47,11 +47,11 @@
         </div>
         <section class="media-container"></section>
     </main>
-    <div id="contact_modal" aria-hidden="true">
+    <div id="contact_modal" aria-hidden="true" role="dialog" aria-describedby="modal-title">
         <div class="modal">
             <header>
-                <h2>Contactez-moi</h2>
-                <img src="assets/icons/close.svg" class="close-modal-btn">
+                <h2 id="modal-title">Contactez-moi</h2>
+                <img src="assets/icons/close.svg" class="close-modal-btn" role="button" aria-label="close modal">
             </header>
             <form>
                 <div>
