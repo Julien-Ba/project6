@@ -64,6 +64,13 @@ h1 {
     font-size: 2rem;
 }
 
+.lightbox .card {
+    &-title {
+        color: utils.$clr-primary;
+        font-size: 1.5rem;
+    }
+}
+
 .user-numbers {
     color: utils.$clr-txt-darkest;
     font-size: 1.5rem;

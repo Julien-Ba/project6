@@ -1,6 +1,6 @@
 @use "../utils";
 
-.background {
+.lightbox {
     display: none;
     width: 100%;
     height: 100%;
@@ -13,7 +13,7 @@
         display: block;
     }
 
-    .lightbox-btn {
+    &-btn {
         width: 2rem;
         height: 2rem;
         position: fixed;
@@ -33,6 +33,19 @@
         &:has(.fa-chevron-right) {
             inset: 0 2rem 0 auto;
             margin-block: auto;
+        }
+    }
+
+    .card {
+        display: none;
+
+        &[data-lightbox_focus="true"] {
+            display: block;
+            max-width: fit-content;
+            position: fixed;
+            inset: 1rem 0;
+            margin: auto;
+            z-index: 11;
         }
     }
 }
@@ -137,18 +150,6 @@
         &-likes {
             justify-self: flex-end;
             margin-inline-start: 2rem;
-        }
-    }
-
-    .card:has(.card-img[data-lightbox_focus="true"]) {
-        max-width: fit-content;
-        position: fixed;
-        inset: 1rem 0;
-        margin: auto;
-        z-index: 11;
-
-        .card-likes {
-            display: none;
         }
     }
 }

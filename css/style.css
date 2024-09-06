@@ -78,6 +78,11 @@ h1 {
   font-size: 2rem;
 }
 
+.lightbox .card-title {
+  color: rgb(144, 28, 28);
+  font-size: 1.5rem;
+}
+
 .user-numbers {
   color: rgb(0, 0, 0);
   font-size: 1.5rem;
@@ -123,13 +128,6 @@ form label {
   height: 300px;
   cursor: pointer;
 }
-.media-container .card-img[data-lightbox_focus=true] {
-  width: clamp(50vw, 90vw, 66rem);
-  height: auto;
-  max-height: 90dvh;
-  aspect-ratio: 35/30;
-  cursor: default;
-}
 .media-container .card-likes {
   cursor: pointer;
   transition: font-family 500ms;
@@ -139,6 +137,17 @@ form label {
 }
 .media-container .card-likes[data-liked=true]::after {
   font-family: "FontAwesome";
+}
+
+.lightbox .card[data-lightbox_focus=true] img,
+.lightbox .card[data-lightbox_focus=true] video {
+  width: clamp(50vw, 90vw, 66rem);
+  height: auto;
+  max-height: 90dvh;
+  aspect-ratio: 35/30;
+}
+.lightbox .card-likes {
+  display: none;
 }
 
 .contact_button {
@@ -189,7 +198,7 @@ h1 {
   align-items: center;
 }
 
-.background {
+.lightbox {
   display: none;
   width: 100%;
   height: 100%;
@@ -198,10 +207,10 @@ h1 {
   z-index: 10;
   background-color: rgb(255, 255, 255);
 }
-.background[data-lightbox_opened=true] {
+.lightbox[data-lightbox_opened=true] {
   display: block;
 }
-.background .lightbox-btn {
+.lightbox-btn {
   width: 2rem;
   height: 2rem;
   position: fixed;
@@ -209,16 +218,27 @@ h1 {
   border: none;
   cursor: pointer;
 }
-.background .lightbox-btn:has(.fa-x) {
+.lightbox-btn:has(.fa-x) {
   inset: 2rem 2rem 0 auto;
 }
-.background .lightbox-btn:has(.fa-chevron-left) {
+.lightbox-btn:has(.fa-chevron-left) {
   inset: 0 2rem;
   margin-block: auto;
 }
-.background .lightbox-btn:has(.fa-chevron-right) {
+.lightbox-btn:has(.fa-chevron-right) {
   inset: 0 2rem 0 auto;
   margin-block: auto;
+}
+.lightbox .card {
+  display: none;
+}
+.lightbox .card[data-lightbox_focus=true] {
+  display: block;
+  max-width: fit-content;
+  position: fixed;
+  inset: 1rem 0;
+  margin: auto;
+  z-index: 11;
 }
 
 #contact_modal {
@@ -312,16 +332,6 @@ h1 {
 .media-container .card-likes {
   justify-self: flex-end;
   margin-inline-start: 2rem;
-}
-.media-container .card:has(.card-img[data-lightbox_focus=true]) {
-  max-width: fit-content;
-  position: fixed;
-  inset: 1rem 0;
-  margin: auto;
-  z-index: 11;
-}
-.media-container .card:has(.card-img[data-lightbox_focus=true]) .card-likes {
-  display: none;
 }
 
 .user-numbers {
