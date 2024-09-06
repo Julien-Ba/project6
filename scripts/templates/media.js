@@ -7,11 +7,25 @@ export class MediaTemplate {
         this.likes = data.likes;
     }
 
-    getMediaDOM() {
+    getImgDOM() {
         const article = document.createElement('article');
         article.classList.add('card');
 
         article.appendChild(this.getMediaImgDOM());
+        article.appendChild(this.getMediaTitleDOM());
+        article.appendChild(this.getMediaLikesDOM());
+        return article;
+    }
+
+    getMediaDOM(type) {
+        const article = document.createElement('article');
+        article.classList.add('card');
+
+        if (type === 'image') {
+            article.appendChild(this.getMediaImgDOM());
+        } else {
+            article.appendChild(this.getMediaVideoDOM());
+        }
         article.appendChild(this.getMediaTitleDOM());
         article.appendChild(this.getMediaLikesDOM());
         return article;
@@ -24,6 +38,14 @@ export class MediaTemplate {
         img.loading = 'lazy';
         img.classList.add('card-img');
         return img;
+    }
+
+    getMediaVideoDOM() {
+        const video = document.createElement('video');
+        video.src = this.media;
+        video.alt = this.title;
+        video.classList.add('card-video');
+        return video;
     }
 
     getMediaTitleDOM() {
