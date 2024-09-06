@@ -33,9 +33,9 @@ async function populateMedia(medias) {
     const mediaPromises = medias.map(async media => {
         const mediaData = new MediaData(media);
         const data = mediaData.getMediaData();
-        const picture = await mediaData.getMedia();
+        const picture = await mediaData.getImage();
         const mediaModel = new MediaTemplate(data, picture);
-        return mediaModel.getMediaDOM();
+        return mediaModel.getImgDOM();
     });
 
     const loadedMedias = await Promise.all(mediaPromises);
@@ -45,7 +45,27 @@ async function populateMedia(medias) {
     });
 
     const sortByDefault = document.querySelectorAll('.filter-parameters > li')[0];
-    sortMedia(sortByDefault);
+    sortMedia(sortByDefault, loadedMedias);
+}
+
+async function populateLightbox(medias) {
+    const mediaPromises = medias.map(async media => {
+        const mediaData = new MediaData(media);
+        const data = mediaData.getMediaData();
+        const picture = await mediaData.getMedia();
+        const mediaType = mediaData.getMediaType();
+        const mediaModel = new MediaTemplate(data, picture);
+        return mediaModel.getMediaDOM(mediaType);
+    });
+
+    const loadedMedias = await Promise.all(mediaPromises);
+    const lightbox = document.querySelector('.lightbox');
+    loadedMedias.forEach(mediaDOM => {
+        lightbox.insertAdjacentElement('beforeend', mediaDOM);
+    });
+
+    const sortByDefault = document.querySelectorAll('.filter-parameters > li')[0];
+    sortMedia(sortByDefault, loadedMedias);
 }
 
 async function init() {
@@ -53,6 +73,7 @@ async function init() {
     const id = new URLSearchParams(window.location.search).get('id');
     populatePhotographer(await getPhotographerByID(photographers, id));
     populateMedia(await getMediaByPhotographerID(media, id));
+    populateLightbox(await getMediaByPhotographerID(media, id));
 }
 
 init();
