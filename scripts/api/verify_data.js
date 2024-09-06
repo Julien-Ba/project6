@@ -84,6 +84,19 @@ export class MediaData {
             return this.loadImage(mediaPath, defaultPath);
         } else {
             mediaPath += this.data.video;
+            return this.loadVideo(mediaPath, defaultPath);
+        }
+    }
+
+    async getImage() {
+        let mediaPath = `assets/media/${this.getMediaData().photographerId}/`;
+        const defaultPath = `assets/photographers/${this.#defaultData.image}`;
+
+        if (this.getMediaType() === 'image') {
+            mediaPath += this.getMediaData().image;
+            return this.loadImage(mediaPath, defaultPath);
+        } else {
+            mediaPath += this.data.video;
             return this.generateVideoThumbnail(mediaPath, defaultPath);
         }
 
@@ -92,7 +105,6 @@ export class MediaData {
     loadImage(mediaPath, defaultPath) {
         return new Promise((resolve) => {
             let media = new Image();
-            if (this.getMediaType() === 'video') media = new Video();
             media.src = mediaPath;
             media.onload = () => resolve(mediaPath);
             media.onerror = () => {
@@ -100,6 +112,19 @@ export class MediaData {
                 resolve(defaultPath);
             }
         });
+    }
+
+    loadVideo(mediaPath, defaultPath) {
+        /*return new Promise((resolve) => {
+            let media = document.createElement('video');
+            media.src = mediaPath;
+            media.onload = () => resolve(mediaPath);
+            media.onerror = () => {
+                console.warn(`Failed to load video: ${mediaPath}, using default`);
+                resolve(defaultPath);
+            }
+        });*/
+        return mediaPath;
     }
 
     generateVideoThumbnail(mediaPath, defaultPath) {
