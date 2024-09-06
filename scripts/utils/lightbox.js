@@ -6,13 +6,13 @@ import { trapFocus } from "../api/accessibility.js";
 
 // ----- Variables ----- \\
 
-const lightbox = document.querySelector('.background');
-const focusableEls = lightbox.querySelectorAll('button');
+
 const mediaContainer = document.querySelector('.media-container');
+const lightbox = document.querySelector('.lightbox');
+
+const focusableEls = lightbox.querySelectorAll('button');
 const closeLightboxBtn = lightbox.querySelector('button:has(.fa-x)');
 const switchLightboxBtns = lightbox.querySelectorAll('button:has(.switch-lightbox)');
-const previousMediaBtn = lightbox.querySelector('button:has(.btn-previous)');
-const nextMediaBtn = lightbox.querySelector('button:has(.btn-next)');
 
 
 
@@ -45,14 +45,31 @@ function openLightbox(event) {
     if (!media.classList.contains('card-img')) return;
     lightbox.dataset.lightbox_opened = 'true';
     lightbox.ariaHidden = 'false';
-    media.dataset.lightbox_focus = 'true';
+    getFocusedMedia(event).dataset.lightbox_focus = 'true';
+    const nextMediaBtn = lightbox.querySelector('button:has(.btn-next)');
     nextMediaBtn.focus();
+    playVideo(getFocusedMedia(event));
+}
+
+function getFocusedMedia(event) {
+    const lightboxMedia = lightbox.querySelectorAll('.card');
+    const images = mediaContainer.querySelectorAll('.card-img');
+    const len = images.length;
+    let focusedMedia = lightboxMedia[0];
+
+    for (let i = 0; i < len; i++) {
+        if (images[i] !== event.target) continue;
+        focusedMedia = lightboxMedia[i];
+        break;
+    }
+    return focusedMedia;
 }
 
 function closeLightbox() {
     lightbox.dataset.lightbox_opened = 'false';
     lightbox.ariaHidden = 'true';
-    mediaContainer.querySelectorAll('.card-img').forEach(img => img.dataset.lightbox_focus = 'false');
+    const lightboxMedia = lightbox.querySelectorAll('.card');
+    lightboxMedia.forEach(card => card.dataset.lightbox_focus = 'false');
 }
 
 function escLightbox(event) {
@@ -65,25 +82,28 @@ function escLightbox(event) {
 function switchLightbox(event) {
     const side = switchSide(event);
     if (side === undefined) return;
-    const medias = mediaContainer.querySelectorAll('.card-img');
-    const len = medias.length;
+
+    const lightboxMedia = lightbox.querySelectorAll('.card');
+    const len = lightboxMedia.length;
     let index = 0;
 
     for (let i = 0; i < len; i++) {
-        if (medias[i].dataset.lightbox_focus && medias[i].dataset.lightbox_focus == 'true') {
+        if (lightboxMedia[i].dataset.lightbox_focus && lightboxMedia[i].dataset.lightbox_focus == 'true') {
             index = i;
             break;
         }
     }
 
-    medias[index].dataset.lightbox_focus = 'false';
+    lightboxMedia[index].dataset.lightbox_focus = 'false';
 
     if (side === 'left') {
         if (index === 0) index = len;
-        medias[index - 1].dataset.lightbox_focus = 'true';
+        lightboxMedia[index - 1].dataset.lightbox_focus = 'true';
+        playVideo(lightboxMedia[index - 1]);
     } else {
         if (index === len - 1) index = -1;
-        medias[index + 1].dataset.lightbox_focus = 'true';
+        lightboxMedia[index + 1].dataset.lightbox_focus = 'true';
+        playVideo(lightboxMedia[index + 1]);
     }
 }
 
@@ -95,11 +115,13 @@ function switchSide(event) {
 
     const isLeftPressed = event.key === 'ArrowLeft' || event.keyCode === 37;
     const isRightPressed = event.key === 'ArrowRight' || event.keyCode === 39;
-    const isPreviousClicked = event.target === previousMediaBtn;
-    const isNextClicked = event.target === nextMediaBtn;
-
     if (event.type === 'keydown' && !isLeftPressed && !isRightPressed)
         return;
+
+    const previousMediaBtn = lightbox.querySelector('.btn-previous');
+    const isPreviousClicked = event.target === previousMediaBtn || event.target === previousMediaBtn.parentElement;
+    const nextMediaBtn = lightbox.querySelector('.btn-next');
+    const isNextClicked = event.target === nextMediaBtn || event.target === nextMediaBtn.parentElement;
     if (event.type === 'click' && !isPreviousClicked && !isNextClicked)
         return;
 
@@ -108,4 +130,11 @@ function switchSide(event) {
         side = 'left';
 
     return side;
+}
+
+function playVideo(card) {
+    if (!card.firstElementChild.tagName === 'VIDEO')
+        return;
+    card.firstElementChild.currentTime = 0;
+    card.firstElementChild.play();
 }
