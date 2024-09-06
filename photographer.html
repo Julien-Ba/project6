@@ -12,17 +12,6 @@
 </head>
 
 <body>
-    <div class="background" aria-hidden="true">
-        <button class="lightbox-btn" aria-label="close media">
-            <i class="fa-solid fa-x"></i>
-        </button>
-        <button class="lightbox-btn" aria-label="switch to the previous media">
-            <i class="fa-solid fa-chevron-left switch-lightbox btn-previous"></i>
-        </button>
-        <button class="lightbox-btn" aria-label="switch to the next media">
-            <i class="fa-solid fa-chevron-right switch-lightbox btn-next"></i>
-        </button>
-    </div>
     <header>
         <img src="assets/images/logo.png" class="logo" alt="fisheye logo">
     </header>
@@ -46,6 +35,17 @@
             </nav>
         </div>
         <section class="media-container"></section>
+        <section class="lightbox" aria-hidden="true">
+            <button class="lightbox-btn" aria-label="close media">
+                <i class="fa-solid fa-x"></i>
+            </button>
+            <button class="lightbox-btn" aria-label="switch to the previous media">
+                <i class="fa-solid fa-chevron-left switch-lightbox btn-previous"></i>
+            </button>
+            <button class="lightbox-btn" aria-label="switch to the next media">
+                <i class="fa-solid fa-chevron-right switch-lightbox btn-next"></i>
+            </button>
+        </section>
     </main>
     <div id="contact_modal" aria-hidden="true" role="dialog" aria-describedby="modal-title">
         <div class="modal">
