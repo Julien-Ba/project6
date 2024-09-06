@@ -61,11 +61,17 @@ function sortFilters(event) {
     extender.click();
 
     // sort media by event.target
-    sortMedia(target);
+    sortMedia(target, document.querySelectorAll('.media-container > .card'));
+    sortMedia(target, document.querySelectorAll('.lightbox > .card'));
 }
 
-function sortMedia(parameter) {
-    const medias = Array.from(document.querySelectorAll('.media-container > .card'));
+function sortMedia(parameter, elements) {
+    const parent = elements[0].parentElement;
+    const medias = Array.from(elements);
+    for (let element in parent.childrenElements) {
+        if (element.classList.contains('card'))
+            parent.removeChild(parent.firstChild);
+    }
     switch (parameter.textContent) {
         case 'Titre':
             medias.sort((a, b) => {
@@ -89,10 +95,5 @@ function sortMedia(parameter) {
 
     const fragment = document.createDocumentFragment();
     medias.forEach(media => fragment.appendChild(media));
-
-    const parent = document.querySelector('.media-container');
-    while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
-    }
     parent.appendChild(fragment);
 }
