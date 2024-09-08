@@ -20,9 +20,10 @@ function extendFilter(event) {
 
     const elements = document.querySelectorAll('.filter-parameters > *:not(:first-child)');
     elements.forEach(element => {
-        element.style.display === '' ? element.style.display = 'block' : element.style.display = '';
+        element.style.display = element.style.display === 'block' ? '' : 'block';
     });
-    document.querySelector('.filter-parameters').firstElementChild.style.display = 'block';
+    const firstElement = document.querySelector('.filter-parameters').firstElementChild;
+    firstElement.style.display = 'block';
 }
 
 function sortFilters(event) {
