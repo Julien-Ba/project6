@@ -40,6 +40,6 @@ function escModal(event) {
 
 function validateForm(event) {
     event.preventDefault();
-    //event.target.reset();
-    //closeModal();
+    event.target.reset();
+    closeModal();
 }
