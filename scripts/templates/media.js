@@ -44,6 +44,7 @@ export class MediaTemplate {
         const video = document.createElement('video');
         video.src = this.media;
         video.alt = this.title;
+        video.loop = true;
         video.classList.add('card-video');
         return video;
     }
