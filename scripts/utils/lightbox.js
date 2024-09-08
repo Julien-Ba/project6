@@ -81,7 +81,7 @@ function escLightbox(event) {
 
 function switchLightbox(event) {
     const side = switchSide(event);
-    if (side === undefined) return;
+    if (!side) return;
 
     const lightboxMedia = lightbox.querySelectorAll('.card');
     const len = lightboxMedia.length;
@@ -113,27 +113,27 @@ function switchSide(event) {
     if (lightbox.ariaHidden === 'true')
         return;
 
-    const isLeftPressed = event.key === 'ArrowLeft' || event.keyCode === 37;
-    const isRightPressed = event.key === 'ArrowRight' || event.keyCode === 39;
-    if (event.type === 'keydown' && !isLeftPressed && !isRightPressed)
-        return;
+    if (event.type === 'keydown') {
+        const isLeftPressed = event.key === 'ArrowLeft' || event.keyCode === 37;
+        const isRightPressed = event.key === 'ArrowRight' || event.keyCode === 39;
+        if (!isLeftPressed && !isRightPressed)
+            return;
+        return isLeftPressed ? 'left' : 'right';
+    }
 
-    const previousMediaBtn = lightbox.querySelector('.btn-previous');
-    const isPreviousClicked = event.target === previousMediaBtn || event.target === previousMediaBtn.parentElement;
-    const nextMediaBtn = lightbox.querySelector('.btn-next');
-    const isNextClicked = event.target === nextMediaBtn || event.target === nextMediaBtn.parentElement;
-    if (event.type === 'click' && !isPreviousClicked && !isNextClicked)
-        return;
-
-    let side = 'right';
-    if (isPreviousClicked || isLeftPressed)
-        side = 'left';
-
-    return side;
+    if (event.type === 'click') {
+        const previousMediaBtn = lightbox.querySelector('.btn-previous');
+        const isPreviousClicked = event.target === previousMediaBtn || event.target === previousMediaBtn.parentElement;
+        const nextMediaBtn = lightbox.querySelector('.btn-next');
+        const isNextClicked = event.target === nextMediaBtn || event.target === nextMediaBtn.parentElement;
+        if (!isPreviousClicked && !isNextClicked)
+            return;
+        return isPreviousClicked ? 'left' : 'right';
+    }
 }
 
 function playVideo(card) {
-    if (!card.firstElementChild.tagName === 'VIDEO')
+    if (card.firstElementChild.tagName !== 'VIDEO')
         return;
     card.firstElementChild.currentTime = 0;
     card.firstElementChild.play();
