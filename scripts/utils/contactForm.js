@@ -21,7 +21,7 @@ modal.addEventListener('keydown', event => trapFocus(event, focusableEls));
 
 
 function displayModal() {
-    modal.style.display = 'block';
+    modal.style.display = 'flex';
     modal.ariaHidden = 'false';
     focusableEls[1].focus();
 }

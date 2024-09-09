@@ -30,8 +30,9 @@
 .media-container {
     .card {
         &-img {
-            width: 350px;
-            height: 300px;
+            width: 21.875rem;
+            height: 18.75rem;
+            border-radius: 0.3rem;
             cursor: pointer;
         }
 
@@ -51,16 +52,21 @@
 }
 
 .lightbox {
-    .card[data-lightbox_focus="true"] {
+    .card {
         img,
         video {
             width: clamp(50vw, 90vw, 66rem);
             height: auto;
             max-height: 90dvh;
             aspect-ratio: 35/30;
+            border-radius: 0.3rem;
         }
-    }
-    .card-likes {
-        display: none;
+        &-title {
+            height: 100%;
+            align-content: center;
+        }
+        &-likes {
+            display: none;
+        }
     }
 }

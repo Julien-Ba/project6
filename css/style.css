@@ -60,7 +60,7 @@ h1 {
   font-size: 1.125rem;
 }
 
-.filter {
+.filter-title, .filter-container {
   font-size: 1.125rem;
   font-weight: 700;
 }
@@ -75,7 +75,7 @@ h1 {
 
 .lightbox-btn {
   color: rgb(144, 28, 28);
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .lightbox .card-title {
@@ -124,8 +124,9 @@ form label {
 }
 
 .media-container .card-img {
-  width: 350px;
-  height: 300px;
+  width: 21.875rem;
+  height: 18.75rem;
+  border-radius: 0.3rem;
   cursor: pointer;
 }
 .media-container .card-likes {
@@ -139,12 +140,17 @@ form label {
   font-family: "FontAwesome";
 }
 
-.lightbox .card[data-lightbox_focus=true] img,
-.lightbox .card[data-lightbox_focus=true] video {
+.lightbox .card img,
+.lightbox .card video {
   width: clamp(50vw, 90vw, 66rem);
   height: auto;
   max-height: 90dvh;
   aspect-ratio: 35/30;
+  border-radius: 0.3rem;
+}
+.lightbox .card-title {
+  height: 100%;
+  align-content: center;
 }
 .lightbox .card-likes {
   display: none;
@@ -161,47 +167,54 @@ form label {
 }
 
 body {
-  margin-inline: 6.25rem;
+  max-width: 90rem;
+  margin: 2rem 6rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.home {
+  gap: 6rem;
 }
 
 header {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: 90px;
-}
-
-h1 {
-  margin-right: 100px;
 }
 
 .logo {
-  height: 50px;
-  margin-left: 100px;
+  width: 12.5rem;
+  height: 3.125rem;
 }
 
 .photographer_section {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 70px;
-  margin-top: 100px;
+  gap: 4.5rem;
 }
 .photographer_section .card a {
-  width: fit-content;
-  height: fit-content;
   margin: auto;
-  justify-self: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
+@media (min-width: 90rem) {
+  body {
+    margin-inline: calc((100vw - 90rem) / 2 + 6rem);
+  }
+}
+.photographer {
+  gap: 3rem;
+}
+
 .lightbox {
   display: none;
   width: 100%;
   height: 100%;
+  padding: 1rem 2rem;
   position: fixed;
   inset: 0;
   z-index: 10;
@@ -211,12 +224,18 @@ h1 {
   display: block;
 }
 .lightbox-btn {
-  width: 2rem;
-  height: 2rem;
+  width: 2.625rem;
+  height: 2.625rem;
   position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+.lightbox-btn i {
+  width: 100%;
 }
 .lightbox-btn:has(.fa-x) {
   inset: 2rem 2rem 0 auto;
@@ -233,21 +252,13 @@ h1 {
   display: none;
 }
 .lightbox .card[data-lightbox_focus=true] {
-  display: block;
+  display: flex;
+  flex-direction: column;
   max-width: fit-content;
   position: fixed;
   inset: 1rem 0;
   margin: auto;
   z-index: 11;
-}
-
-#contact_modal {
-  position: fixed;
-  top: 5%;
-  left: 25%;
-  width: 50%;
-  height: 90%;
-  display: none;
 }
 
 .photograph-header {
@@ -283,19 +294,26 @@ h1 {
   border-radius: 0.3rem;
 }
 .filter-extender {
+  width: 3rem;
+  height: 4rem;
   position: absolute;
-  top: 0.75rem;
-  right: 1.25rem;
+  top: 0;
+  right: 0;
+  align-content: center;
+  text-align: center;
   cursor: pointer;
 }
 .filter-parameters {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+}
+.filter-parameters :nth-child(1) {
+  margin-inline-end: 1.5rem;
 }
 .filter-parameters li {
-  margin-inline-end: 2.5rem;
+  height: 3rem;
   cursor: pointer;
+  align-content: center;
 }
 .filter-parameters .hr {
   height: 1px;
@@ -314,7 +332,8 @@ h1 {
   grid-gap: 1rem;
 }
 .media-container .card {
-  max-width: 350px;
+  width: 21.875rem;
+  height: 21.875rem;
   display: grid;
   grid-template-columns: repeat(2, auto);
   grid-template-rows: repeat(2, auto);
@@ -345,21 +364,37 @@ h1 {
   gap: 4rem;
 }
 
+#contact_modal {
+  position: fixed;
+  inset: 0;
+  display: none;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .modal {
+  width: 80%;
+  max-width: 42rem;
+  height: 90%;
+  max-height: 56.25rem;
   border-radius: 0.3rem;
   background-color: #db8876;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem;
-  margin: auto;
+  padding: 0 2rem 1rem;
+  overflow-y: auto;
+  box-shadow: -0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.4);
 }
 
 .modal header {
   justify-content: space-between;
   width: 100%;
-  margin-block: 1rem 3rem;
+  margin-block: 0.5rem 1rem;
 }
 
 .modal header img {
@@ -408,6 +443,26 @@ form input[type=submit]:focus {
 .modal .close-modal-btn:focus {
   filter: drop-shadow(2px 2px 1px rgb(144, 28, 28));
   outline: none;
+}
+
+@media (min-width: 90rem) {
+  .user-numbers {
+    right: calc((100vw - 90rem) / 2 + 2rem);
+  }
+  .lightbox-btn:has(.fa-x) {
+    inset: calc((100dvh - 60rem) / 2 + 2.5rem) calc((100vw - 90rem) / 2 + 6rem) 0 auto;
+  }
+  .lightbox-btn:has(.fa-chevron-left) {
+    inset: 0 calc((100vw - 90rem) / 2 + 6rem);
+    margin-block: auto;
+  }
+  .lightbox-btn:has(.fa-chevron-right) {
+    inset: 0 calc((100vw - 90rem) / 2 + 6rem) 0 auto;
+    margin-block: auto;
+  }
+  .lightbox .card[data-lightbox_focus=true] {
+    inset: calc((100dvh - 60rem) / 2 + 2.5rem) 0 calc((100dvh - 60rem) / 2 + 1rem);
+  }
 }
 
 /*# sourceMappingURL=style.css.map */

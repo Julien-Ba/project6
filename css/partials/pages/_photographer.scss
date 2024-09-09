@@ -1,9 +1,14 @@
 @use "../utils";
 
+.photographer {
+    gap: 3rem;
+}
+
 .lightbox {
     display: none;
     width: 100%;
     height: 100%;
+    padding: 1rem 2rem;
     position: fixed;
     inset: 0;
     z-index: 10;
@@ -14,12 +19,19 @@
     }
 
     &-btn {
-        width: 2rem;
-        height: 2rem;
+        width: 2.625rem;
+        height: 2.625rem;
         position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background-color: transparent;
         border: none;
         cursor: pointer;
+
+        i {
+            width: 100%;
+        }
 
         &:has(.fa-x) {
             inset: 2rem 2rem 0 auto;
@@ -40,7 +52,8 @@
         display: none;
 
         &[data-lightbox_focus="true"] {
-            display: block;
+            display: flex;
+            flex-direction: column;
             max-width: fit-content;
             position: fixed;
             inset: 1rem 0;
@@ -48,15 +61,6 @@
             z-index: 11;
         }
     }
-}
-
-#contact_modal {
-    position: fixed;
-    top: 5%;
-    left: 25%;
-    width: 50%;
-    height: 90%;
-    display: none;
 }
 
 .photograph-header {
@@ -94,20 +98,28 @@
     }
 
     &-extender {
+        width: 3rem;
+        height: 4rem;
         position: absolute;
-        top: 0.75rem;
-        right: 1.25rem;
+        top: 0;
+        right: 0;
+        align-content: center;
+        text-align: center;
         cursor: pointer;
     }
 
     &-parameters {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+
+        :nth-child(1) {
+            margin-inline-end: 1.5rem;
+        }
 
         li {
-            margin-inline-end: 2.5rem;
+            height: 3rem;
             cursor: pointer;
+            align-content: center;
         }
 
         .hr {
@@ -130,7 +142,8 @@
     grid-gap: 1rem;
 
     .card {
-        max-width: 350px;
+        width: 21.875rem;
+        height: 21.875rem;
         display: grid;
         grid-template-columns: repeat(2, auto);
         grid-template-rows: repeat(2, auto);
@@ -165,21 +178,37 @@
     gap: 4rem;
 }
 
+#contact_modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
 .modal {
+    width: 80%;
+    max-width: 42rem;
+    height: 90%;
+    max-height: 56.25rem;
     border-radius: 0.3rem;
     background-color: #db8876;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    padding: 2rem;
-    margin: auto;
+    padding: 0 2rem 1rem;
+    overflow-y: auto;
+    box-shadow: -0.3rem 0.3rem 1rem rgba(0, 0, 0, 0.4);
 }
 
 .modal header {
     justify-content: space-between;
     width: 100%;
-    margin-block: 1rem 3rem;
+    margin-block: 0.5rem 1rem;
 }
 
 .modal header img {
@@ -228,4 +257,39 @@ form input[type="submit"]:focus {
 .modal .close-modal-btn:focus {
     filter: drop-shadow(2px 2px 1px utils.$clr-primary);
     outline: none;
+}
+
+@media (min-width: 90rem) {
+    $margin-inline: calc((100vw - 90rem) / 2);
+    $margin-inline-numbers: calc($margin-inline + 2rem);
+    $margin-inline-lightbox: calc($margin-inline + 6rem);
+
+    $margin-block-start: calc((100dvh - 60rem) / 2 + 2.5rem);
+    $margin-block-end: calc((100dvh - 60rem) / 2 + 1rem);
+
+    .user-numbers {
+        right: $margin-inline-numbers;
+    }
+
+    .lightbox {
+        &-btn {
+            &:has(.fa-x) {
+                inset: $margin-block-start $margin-inline-lightbox 0 auto;
+            }
+
+            &:has(.fa-chevron-left) {
+                inset: 0 $margin-inline-lightbox;
+                margin-block: auto;
+            }
+
+            &:has(.fa-chevron-right) {
+                inset: 0 $margin-inline-lightbox 0 auto;
+                margin-block: auto;
+            }
+        }
+
+        .card[data-lightbox_focus="true"] {
+            inset: $margin-block-start 0 $margin-block-end;
+        }
+    }
 }
