@@ -1,29 +1,57 @@
+import { simulateClick, trapFocus } from "../api/accessibility.js";
 export { sortMedia };
 
 
 
-const extendFilterBtn = document.querySelector('.filter-extender');
-extendFilterBtn.addEventListener('click', extendFilter);
+const container = document.querySelector('.filter-container');
+let focusableElements = container.querySelectorAll('i,li');
+container.addEventListener('keydown', event => trapFocus(event, focusableElements));
 
-const filterParameters = document.querySelectorAll('.filter-parameters > li');
+const extendFilterBtn = container.querySelector('.filter-extender');
+extendFilterBtn.addEventListener('click', extendFilter);
+extendFilterBtn.addEventListener('keydown', simulateClick);
+// disalbe default fontawesome behaviour
+setTimeout(() => {
+    extendFilterBtn.ariaHidden = false;
+}, 1000);
+
+const filterParameters = container.querySelectorAll('.filter-parameters > li');
 filterParameters.forEach(filter => filter.addEventListener('click', sortFilters));
+filterParameters.forEach(filter => filter.addEventListener('keydown', simulateClick));
 
 function extendFilter(event) {
     const btn = event.target;
+    // if the container was closed
     if (btn.classList.contains('fa-chevron-down')) {
+        // toggle the close icon
         btn.classList.remove('fa-chevron-down');
         btn.classList.add('fa-chevron-up');
+        // add focus to the list elements, ignore the icon
+        for (let i = 1; i < focusableElements.length; i++) {
+            focusableElements[i].setAttribute('tabindex', '0');
+        }
+        // if the conatiner was open
     } else {
+        // toggle the open icon
         btn.classList.remove('fa-chevron-up');
         btn.classList.add('fa-chevron-down');
+        // remove the focus from the list elements, ignore the icon
+        for (let i = 1; i < focusableElements.length; i++) {
+            focusableElements[i].setAttribute('inert', 'true');
+        }
     }
 
+    // toggle the display on all the elements but the first one
     const elements = document.querySelectorAll('.filter-parameters > *:not(:first-child)');
     elements.forEach(element => {
         element.style.display = element.style.display === 'block' ? '' : 'block';
     });
+    // if elements order was changed, display the first one as per default
     const firstElement = document.querySelector('.filter-parameters').firstElementChild;
     firstElement.style.display = 'block';
+
+    // reset the list order for the focus trap
+    focusableElements = container.querySelectorAll('i,li');
 }
 
 function sortFilters(event) {
