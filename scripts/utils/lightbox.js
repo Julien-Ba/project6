@@ -1,4 +1,4 @@
-import { trapFocus } from "../api/accessibility.js";
+import { simulateClick, trapFocus } from "../api/accessibility.js";
 
 
 
@@ -22,6 +22,7 @@ const switchLightboxBtns = lightbox.querySelectorAll('button:has(.switch-lightbo
 
 // open the lightbox
 mediaContainer.addEventListener('click', openLightbox);
+mediaContainer.addEventListener('keydown', simulateClick);
 
 // close the lightbox
 closeLightboxBtn.addEventListener('click', closeLightbox);
