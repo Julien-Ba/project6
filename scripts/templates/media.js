@@ -11,7 +11,9 @@ export class MediaTemplate {
         const article = document.createElement('article');
         article.classList.add('card');
 
-        article.appendChild(this.getMediaImgDOM());
+        const image = this.getMediaImgDOM();
+        image.setAttribute('tabindex', '0');
+        article.appendChild(image);
         article.appendChild(this.getMediaTitleDOM());
         article.appendChild(this.getMediaLikesDOM());
         return article;
