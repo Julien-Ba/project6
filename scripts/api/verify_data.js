@@ -17,7 +17,7 @@ export class PhotographerData {
     getUserData() {
         let userData = {};
         for (let key in this.#defaultData) {
-            if (!this.data.hasOwnProperty(key) || this.data[key] === '') {
+            if (!Object.hasOwn(this.data, key) || this.data[key] === '') {
                 userData[key] = this.#defaultData[key];
             } else {
                 userData[key] = this.data[key];
@@ -62,7 +62,7 @@ export class MediaData {
     getMediaData() {
         let mediaData = {};
         for (let key in this.#defaultData) {
-            if (!this.data.hasOwnProperty(key) || this.data[key] === '') {
+            if (!Object.hasOwn(this.data, key) || this.data[key] === '') {
                 mediaData[key] = this.#defaultData[key];
             } else {
                 mediaData[key] = this.data[key];
@@ -75,7 +75,7 @@ export class MediaData {
         return this.data.video && this.data.video !== '' ? 'video' : 'image';
     }
 
-    async getMedia() {
+    getMedia() {
         let mediaPath = `assets/media/${this.getMediaData().photographerId}/`;
         const defaultPath = `assets/photographers/${this.#defaultData.image}`;
 
@@ -88,7 +88,7 @@ export class MediaData {
         }
     }
 
-    async getImage() {
+    getImage() {
         let mediaPath = `assets/media/${this.getMediaData().photographerId}/`;
         const defaultPath = `assets/photographers/${this.#defaultData.image}`;
 
@@ -115,16 +115,16 @@ export class MediaData {
     }
 
     loadVideo(mediaPath, defaultPath) {
-        /*return new Promise((resolve) => {
+        return new Promise((resolve) => {
             let media = document.createElement('video');
             media.src = mediaPath;
-            media.onload = () => resolve(mediaPath);
-            media.onerror = () => {
+            media.addEventListener('canplaythrough', () => resolve(mediaPath), { once: true });
+            media.addEventListener('error', () => {
                 console.warn(`Failed to load video: ${mediaPath}, using default`);
                 resolve(defaultPath);
-            }
-        });*/
-        return mediaPath;
+            }, { once: true });
+            media.load();
+        });
     }
 
     generateVideoThumbnail(mediaPath, defaultPath) {
