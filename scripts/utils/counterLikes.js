@@ -9,7 +9,7 @@ function likesCounter(event) {
     const totalLikes = document.querySelector('.total-likes');
 
     if (!likes.dataset.liked || likes.dataset.liked === 'false') {
-        isLikeNumber(event, 0);
+        isLikeNumber(likes, 0);
         likes.textContent = (Number(likes.textContent) + 1).toString();
         totalLikes.textContent = (Number(totalLikes.textContent) + 1).toString();
         likes.dataset.liked = 'true';
@@ -17,16 +17,16 @@ function likesCounter(event) {
     }
 
     if (likes.dataset.liked === 'true') {
-        isLikeNumber(event, 1);
+        isLikeNumber(likes, 1);
         likes.textContent = (Number(likes.textContent) - 1).toString();
         totalLikes.textContent = (Number(totalLikes.textContent) - 1).toString();
         likes.dataset.liked = 'false';
     }
 }
 
-function isLikeNumber(event, resetPoint) {
-    if (Number.isNaN(event.target.textContent)) {
-        console.warn(`The ${event.target} was containing ${event.target.textContent}, NOT a valid value, resetting to ${resetPoint} ...`);
-        event.target.textContent = `${resetPoint}`;
+function isLikeNumber(likes, resetPoint) {
+    if (Number.isNaN(likes.textContent)) {
+        console.warn(`The ${likes} was containing ${likes.textContent}, NOT a valid value, resetting to ${resetPoint} ...`);
+        likes.textContent = `${resetPoint}`;
     }
 }
