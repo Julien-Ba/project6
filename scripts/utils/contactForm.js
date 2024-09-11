@@ -3,7 +3,7 @@ import { simulateClick, trapFocus } from "../api/accessibility.js";
 
 
 const modal = document.getElementById("contact_modal");
-const focusableEls = modal.querySelectorAll('input, textarea, .close-modal-btn');
+const focusableElements = modal.querySelectorAll('input, textarea, .close-modal-btn');
 
 const openModalBtn = document.querySelector('.contact_button');
 openModalBtn.addEventListener('click', displayModal);
@@ -16,14 +16,15 @@ modal.addEventListener('keydown', escModal);
 const submitForm = document.querySelector('form');
 submitForm.addEventListener('submit', validateForm);
 
-modal.addEventListener('keydown', event => trapFocus(event, focusableEls));
+modal.addEventListener('keydown', event => trapFocus(event, focusableElements));
 
 
 
 function displayModal() {
     modal.style.display = 'flex';
     modal.ariaHidden = 'false';
-    focusableEls[1].focus();
+    // focus the 1st input
+    focusableElements[1].focus();
 }
 
 function closeModal() {
