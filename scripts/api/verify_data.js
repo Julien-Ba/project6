@@ -135,8 +135,8 @@ export class MediaData {
             video.preload = 'metadata';
 
             video.onloadedmetadata = () => {
-                // Seek to 25% of the video duration
-                video.currentTime = video.duration * 0.25;
+                // Seek to 1% of the video duration
+                video.currentTime = video.duration * 0.01;
             };
 
             video.onseeked = () => {
