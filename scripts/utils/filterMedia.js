@@ -37,7 +37,7 @@ function extendFilter(event) {
         btn.classList.add('fa-chevron-down');
         // remove the focus from the list elements, ignore the icon
         for (let i = 1; i < focusableElements.length; i++) {
-            focusableElements[i].setAttribute('inert', 'true');
+            focusableElements[i].setAttribute('aria-hidden', 'true');
         }
     }
 
