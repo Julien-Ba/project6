@@ -13,7 +13,7 @@ extendFilterBtn.addEventListener('keydown', simulateClick);
 // disalbe default fontawesome behaviour
 setTimeout(() => {
     extendFilterBtn.ariaHidden = false;
-}, 1000);
+}, 3000);
 
 const filterParameters = container.querySelectorAll('.filter-parameters > li');
 filterParameters.forEach(filter => filter.addEventListener('click', sortFilters));
