@@ -96,6 +96,7 @@ function switchLightbox(event) {
     }
 
     lightboxMedia[index].dataset.lightbox_focus = 'false';
+    stopVideo(lightboxMedia[index]);
 
     if (side === 'left') {
         if (index === 0) index = len;
@@ -138,4 +139,10 @@ function playVideo(card) {
         return;
     card.firstElementChild.currentTime = 0;
     card.firstElementChild.play();
+}
+
+function stopVideo(card) {
+    if (card.firstElementChild.tagName !== 'VIDEO')
+        return;
+    card.firstElementChild.pause();
 }
