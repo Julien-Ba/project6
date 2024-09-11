@@ -10,7 +10,7 @@ import { simulateClick, trapFocus } from "../api/accessibility.js";
 const mediaContainer = document.querySelector('.media-container');
 const lightbox = document.querySelector('.lightbox');
 
-const focusableEls = lightbox.querySelectorAll('button');
+const focusableElements = lightbox.querySelectorAll('button');
 const closeLightboxBtn = lightbox.querySelector('button:has(.fa-x)');
 const switchLightboxBtns = lightbox.querySelectorAll('button:has(.switch-lightbox)');
 
@@ -33,7 +33,7 @@ switchLightboxBtns.forEach(btn => btn.addEventListener('click', switchLightbox))
 lightbox.addEventListener('keydown', switchLightbox);
 
 // accessibility
-lightbox.addEventListener('keydown', event => trapFocus(event, focusableEls));
+lightbox.addEventListener('keydown', event => trapFocus(event, focusableElements));
 
 
 
