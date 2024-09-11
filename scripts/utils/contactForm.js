@@ -2,7 +2,7 @@ import { simulateClick, trapFocus } from "../api/accessibility.js";
 
 
 
-const modal = document.getElementById("contact_modal");
+const modal = document.querySelector('#contact_modal');
 const focusableElements = modal.querySelectorAll('input, textarea, .close-modal-btn');
 
 const openModalBtn = document.querySelector('.contact_button');
