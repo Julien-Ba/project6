@@ -117,6 +117,11 @@ function sortMedia(parameter, elements) {
             });
             break;
         case 'Date':
+            medias.sort((a, b) => {
+                const dateA = Date.parse(a.querySelector('.card-media').dataset.date);
+                const dateB = Date.parse(b.querySelector('.card-media').dataset.date);
+                return dateB - dateA;
+            });
             break;
         default:
             console.warn('Invalid sorting parameter');

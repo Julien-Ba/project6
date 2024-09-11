@@ -5,6 +5,7 @@ export class MediaTemplate {
 
         this.title = data.title;
         this.likes = data.likes;
+        this.date = data.date;
     }
 
     getImgDOM() {
@@ -39,6 +40,8 @@ export class MediaTemplate {
         img.alt = this.title;
         img.loading = 'lazy';
         img.classList.add('card-img');
+        img.classList.add('card-media');
+        img.dataset.date = this.date;
         return img;
     }
 
@@ -48,6 +51,8 @@ export class MediaTemplate {
         video.alt = this.title;
         video.loop = true;
         video.classList.add('card-video');
+        video.classList.add('card-media');
+        video.dataset.date = this.date;
         return video;
     }
 
