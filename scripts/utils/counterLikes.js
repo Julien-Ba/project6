@@ -1,4 +1,5 @@
-document.addEventListener('click', likesCounter);
+const container = document.querySelector('.media-container');
+container.addEventListener('click', likesCounter);
 
 function likesCounter(event) {
     const likes = event.target;
