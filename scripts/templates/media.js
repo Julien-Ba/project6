@@ -68,6 +68,7 @@ export class MediaTemplate {
         p.textContent = this.likes;
         p.classList.add('card-likes');
         p.ariaLabel = 'number of likes';
+        p.tabIndex = '0';
         return p;
     }
 

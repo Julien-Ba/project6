@@ -5,7 +5,10 @@ export { sortMedia };
 
 const container = document.querySelector('.filter-container');
 let focusableElements = container.querySelectorAll('i,li');
-container.addEventListener('keydown', event => trapFocus(event, focusableElements));
+container.addEventListener('keydown', event => {
+    if (event.target.classList.contains('fa-chevron-down')) return;
+    trapFocus(event, focusableElements);
+});
 
 const extendFilterBtn = container.querySelector('.filter-extender');
 extendFilterBtn.addEventListener('click', extendFilter);
@@ -28,7 +31,8 @@ function extendFilter(event) {
         btn.classList.add('fa-chevron-up');
         // add focus to the list elements, ignore the icon
         for (let i = 1; i < focusableElements.length; i++) {
-            focusableElements[i].setAttribute('tabindex', '0');
+            focusableElements[i].tabIndex = '0';
+            focusableElements[i].removeAttribute('aria-hidden');
         }
         // if the conatiner was open
     } else {
@@ -37,7 +41,8 @@ function extendFilter(event) {
         btn.classList.add('fa-chevron-down');
         // remove the focus from the list elements, ignore the icon
         for (let i = 1; i < focusableElements.length; i++) {
-            focusableElements[i].setAttribute('aria-hidden', 'true');
+            focusableElements[i].removeAttribute('tabindex');
+            focusableElements[i].ariaHidden = 'true';
         }
     }
 
