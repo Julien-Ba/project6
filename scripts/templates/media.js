@@ -50,6 +50,7 @@ export class MediaTemplate {
         video.src = this.media;
         video.alt = this.title;
         video.loop = true;
+        video.controls = true;
         video.classList.add('card-video');
         video.classList.add('card-media');
         video.dataset.date = this.date;
