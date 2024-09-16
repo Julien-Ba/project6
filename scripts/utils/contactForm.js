@@ -41,6 +41,11 @@ function escModal(event) {
 
 function validateForm(event) {
     event.preventDefault();
+    const form = event.target;
+    const len = form.elements.length;
+    for (let i = 0; i < len; i++) {
+        console.log(`${form.elements[i].name}: ${form.elements[i].value}`);
+    }
     event.target.reset();
     closeModal();
 }
