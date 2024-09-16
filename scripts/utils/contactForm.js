@@ -44,6 +44,7 @@ function validateForm(event) {
     const form = event.target;
     const len = form.elements.length;
     for (let i = 0; i < len; i++) {
+        if (!form.elements[i].name || !form.elements[i].value) continue;
         console.log(`${form.elements[i].name}: ${form.elements[i].value}`);
     }
     event.target.reset();
